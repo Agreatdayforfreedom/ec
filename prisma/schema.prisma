@@ -1,0 +1,49 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+
+model Product {
+  id          String @id @default(cuid())
+  title       String
+  description String?
+  author      String 
+  image       String
+  price       Int   
+  stock       Int @default(1)
+
+  metadata    Metadata?
+
+  @@map("product")
+}
+
+enum Cover {
+  HARDCOVER
+  PAPERBACK
+}
+
+model Metadata {
+  id        String @id @default(cuid())
+  pages     Int @default(1)
+  publisher String
+  language  String?
+  cover     Cover @default(PAPERBACK)
+  year      DateTime @default(now())
+  isbn      String?
+
+  product   Product @relation(fields: [productId], references: [id])
+  productId String @unique
+
+  @@map("metadata")
+}

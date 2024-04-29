@@ -1,0 +1,8 @@
+//PRODUCT
+
+GET http://localhost:3000/product
+
+
+###
+GET http://localhost:3000/product/asd
+
