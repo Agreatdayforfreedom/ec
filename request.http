@@ -6,3 +6,15 @@ GET http://localhost:3000/product
 ###
 GET http://localhost:3000/product/asd
 
+###
+POST http://localhost:3000/product HTTP/1.1
+content-type: application/json
+
+{
+    "title": "from",
+    "description": "from",
+    "author": "from",
+    "stock": 10,
+    "price": 903,
+    "image": "none.jpg"
+}
