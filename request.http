@@ -47,3 +47,24 @@ content-type: application/json
     "email": "test@text.com",
     "password": "123123"
 }
+
+### #! Metadata
+POST http://localhost:3000/metadata/add/asd
+content-type: application/json
+
+{
+	"pages": 234,
+	"publisher": "asdpub",
+	"language": "esperanto",
+	"cover": "PAPERBACK",
+	"isbn": "ADWJKLHNÑAWJDAW"
+}
+
+###
+
+PUT http://localhost:3000/metadata/update/clvmvt81e00057nst8exhie8j
+content-type: application/json
+
+{
+	"pages": 32
+}
