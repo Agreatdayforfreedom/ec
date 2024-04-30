@@ -18,3 +18,32 @@ content-type: application/json
     "price": 903,
     "image": "none.jpg"
 }
+
+
+### #! AUTH 
+
+GET http://localhost:3000/auth/profile HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJjbHZtdGRiYWowMDAwZG5peGxyeTkxNHlxIiwiZW1haWwiOiJ0ZXN0QHRleHQuY29tIiwiaWF0IjoxNzE0NTA4ODU1LCJleHAiOjE3MTQ1MDg5MTV9.czgc8iwr_aJcGRWJIq75gQ4AJCAQze3qvg9O6W2xVAI
+
+
+
+###
+
+POST http://localhost:3000/auth/signup HTTP/1.1
+content-type: application/json
+
+{
+    "username": "test",
+    "email": "test@text.com",
+    "password": "123123"
+}
+
+###
+
+POST http://localhost:3000/auth/signin HTTP/1.1
+content-type: application/json
+
+{
+    "email": "test@text.com",
+    "password": "123123"
+}
