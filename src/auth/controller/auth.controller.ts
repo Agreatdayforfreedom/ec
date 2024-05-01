@@ -1,31 +1,26 @@
-import {
-  Body,
-  Controller,
-  Get,
-  Post,
-  Request,
-  UseGuards,
-} from '@nestjs/common';
+import { Body, Controller, Get, Post, Request } from '@nestjs/common';
 import { CreateUserDTO } from '../../user/dto/user.dto';
 import { AuthService } from '../services/auth.service';
-import { AuthGuard } from '../auth.guard';
+import { Public } from '../public.decorator';
 
 @Controller('auth')
 export class AuthController {
-  constructor(private authService: AuthService) {}
+	constructor(private authService: AuthService) {}
 
-  @Post('signup')
-  signup(@Body() payload: CreateUserDTO) {
-    return this.authService.signup(payload);
-  }
+	@Public()
+	@Post('signup')
+	signup(@Body() payload: CreateUserDTO) {
+		return this.authService.signup(payload);
+	}
 
-  @Post('signin')
-  signin(@Body() { email, password }: Record<string, string>) {
-    return this.authService.signIn(email, password);
-  }
+	@Public()
+	@Post('signin')
+	signin(@Body() { email, password }: Record<string, string>) {
+		return this.authService.signIn(email, password);
+	}
 
-  @Get('profile')
-  getProfile(@Request() req) {
-    return req.user;
-  }
+	@Get('profile')
+	getProfile(@Request() req) {
+		return req.user;
+	}
 }

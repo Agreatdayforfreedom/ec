@@ -1,3 +1,4 @@
+@token = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNsdm9hOGNkYTAwMDBhNHB1dGdqcjA2NTciLCJlbWFpbCI6InRlc3RAdGV4dC5jb20iLCJjYXJ0IjoiY2x2b2E4Y2RhMDAwMWE0cHVjajRncWZ3OCIsImlhdCI6MTcxNDU5NzUyMywiZXhwIjoxNzE0NjgzOTIzfQ.e9QtcfS7qgWwRq5QaNq5zuIVuPeHJA_9t0obVCSBgM8
 //PRODUCT
 
 GET http://localhost:3000/product
@@ -9,11 +10,12 @@ GET http://localhost:3000/product/asd
 ###
 POST http://localhost:3000/product HTTP/1.1
 content-type: application/json
+Authorization: {{token}}
 
 {
-    "title": "from",
-    "description": "from",
-    "author": "from",
+    "title": "nietzsche",
+    "description": "nietzsche",
+    "author": "nietzsche",
     "stock": 10,
     "price": 903,
     "image": "none.jpg"
@@ -23,8 +25,7 @@ content-type: application/json
 ### #! AUTH 
 
 GET http://localhost:3000/auth/profile HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJjbHZtdGRiYWowMDAwZG5peGxyeTkxNHlxIiwiZW1haWwiOiJ0ZXN0QHRleHQuY29tIiwiaWF0IjoxNzE0NTA4ODU1LCJleHAiOjE3MTQ1MDg5MTV9.czgc8iwr_aJcGRWJIq75gQ4AJCAQze3qvg9O6W2xVAI
-
+Authorization: {{token}}
 
 
 ###
@@ -68,3 +69,29 @@ content-type: application/json
 {
 	"pages": 32
 }
+
+
+### !CART
+GET http://localhost:3000/cart HTTP/1.1
+Authorization: {{token}}
+
+###
+POST http://localhost:3000/cart/add/clvocrmeb000081xrbhbguz86 HTTP/1.1
+Authorization: {{token}}
+
+###
+PATCH http://localhost:3000/cart/qty/clvofb1sh0001y74o2j1rimit HTTP/1.1
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+	"qty": -1
+}
+
+###
+DELETE http://localhost:3000/cart/del/clvof2i1b00019s7u3w1egwnu
+Authorization: {{token}}
+
+
+
+

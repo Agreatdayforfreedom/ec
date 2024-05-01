@@ -20,6 +20,9 @@ model User {
   email    String
   password String
 
+	cart Cart @relation(fields: [cartId], references: [id])
+	cartId String @unique 
+
   @@map("user")
 }
 
@@ -35,7 +38,35 @@ model Product {
 
   metadata    Metadata?
 
+	cart_item     Cart_Item?
+	
+	
+
   @@map("product")
+}
+
+model Cart_Item {
+	id   	     String  @id @default(cuid())
+	qty        Int     @default(1)
+	totalPrice Int
+
+	product    Product @relation(fields: [productId], references: [id])
+	productId  String  @unique
+
+	cart    	 Cart    @relation(fields: [cartId], references: [id])
+	cartId  	 String 
+
+	@@map("cart_item")
+}
+
+model Cart {
+	id	  String @id @default(cuid())
+
+	user  User?
+	
+	items Cart_Item[]
+
+	@@map("cart")
 }
 
 enum Cover {
@@ -44,16 +75,16 @@ enum Cover {
 }
 
 model Metadata {
-  id        String @id @default(cuid())
-  pages     Int @default(1)
+  id        String   @id @default(cuid())
+  pages     Int      @default(1)
   publisher String
   language  String?
-  cover     Cover @default(PAPERBACK)
+  cover     Cover    @default(PAPERBACK)
   year      DateTime @default(now())
   isbn      String?
 
-  product   Product @relation(fields: [productId], references: [id])
-  productId String @unique
+  product   Product  @relation(fields: [productId], references: [id])
+  productId String   @unique
 
   @@map("metadata")
 }
