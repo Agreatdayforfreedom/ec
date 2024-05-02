@@ -20,8 +20,10 @@ model User {
   email    String
   password String
 
-	cart Cart @relation(fields: [cartId], references: [id])
-	cartId String @unique 
+	cart 		 Cart 	@relation(fields: [cartId], references: [id])
+	cartId   String @unique 
+
+	reviews  Reviews[]
 
   @@map("user")
 }
@@ -34,13 +36,13 @@ model Product {
   author      String 
   image       String
   price       Int   
-  stock       Int @default(1)
+  stock       Int 	 @default(1)
 
   metadata    Metadata?
 
-	cart_item     Cart_Item?
+	cart_item   Cart_Item?
 	
-	
+	reviews 		Reviews[]
 
   @@map("product")
 }
@@ -87,4 +89,21 @@ model Metadata {
   productId String   @unique
 
   @@map("metadata")
+}
+
+model Reviews {
+	id 				 String 	@id @default(cuid())
+	stars 		 Int
+	text 			 String 
+
+	created_at DateTime @default(now())
+	updated_at DateTime @updatedAt
+
+	user 			 User     @relation(fields: [userId], references: [id])
+	userId  	 String 
+
+	product		 Product  @relation(fields: [productId], references: [id])
+	productId  String
+
+	@@map("reviews")
 }

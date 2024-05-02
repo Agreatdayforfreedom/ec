@@ -80,18 +80,44 @@ POST http://localhost:3000/cart/add/clvocrmeb000081xrbhbguz86 HTTP/1.1
 Authorization: {{token}}
 
 ###
-PATCH http://localhost:3000/cart/qty/clvofb1sh0001y74o2j1rimit HTTP/1.1
+PATCH http://localhost:3000/cart/qty/clvofst540001fjvsgldyiwb5 HTTP/1.1
 Content-Type: application/json
 Authorization: {{token}}
 
 {
-	"qty": -1
+	"qty": -2
 }
 
 ###
-DELETE http://localhost:3000/cart/del/clvof2i1b00019s7u3w1egwnu
+DELETE http://localhost:3000/cart/del/clvofio8e0003cklaieuozi0u
 Authorization: {{token}}
 
 
 
 
+### REVIEWS
+
+GET http://localhost:3000/reviews/clvocrmeb000081xrbhbguz86
+
+
+###
+POST http://localhost:3000/reviews/send/clvocrmeb000081xrbhbguz86
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+	"stars": 3,
+	"text": "good book lol"
+}
+
+###
+PATCH http://localhost:3000/reviews/update/clvpldezr0003r9et86o6fubb
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+	"stars": 4
+}
+
+### 
+DELETE http://localhost:3000/reviews/del/clvpldezr0003r9et86o6fubb
