@@ -15,7 +15,12 @@ export class AuthService {
 		if (user?.password !== pass) {
 			throw new UnauthorizedException();
 		}
-		const payload = { id: user.id, email: user.email, cart: user.cartId };
+		const payload = {
+			id: user.id,
+			email: user.email,
+			cart: user.cartId,
+			role: user.role,
+		};
 		return {
 			access_token: await this.jwtService.signAsync(payload),
 		};

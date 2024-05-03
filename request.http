@@ -1,11 +1,11 @@
-@token = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNsdm9hOGNkYTAwMDBhNHB1dGdqcjA2NTciLCJlbWFpbCI6InRlc3RAdGV4dC5jb20iLCJjYXJ0IjoiY2x2b2E4Y2RhMDAwMWE0cHVjajRncWZ3OCIsImlhdCI6MTcxNDU5NzUyMywiZXhwIjoxNzE0NjgzOTIzfQ.e9QtcfS7qgWwRq5QaNq5zuIVuPeHJA_9t0obVCSBgM8
+@token = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNsdm9hOGNkYTAwMDBhNHB1dGdqcjA2NTciLCJlbWFpbCI6InRlc3RAdGV4dC5jb20iLCJjYXJ0IjoiY2x2b2E4Y2RhMDAwMWE0cHVjajRncWZ3OCIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTcxNDc0NjQzNSwiZXhwIjoxNzE0ODMyODM1fQ.RFTkrRSQmDTo04HMgHmLJjIet46Z7XGD1bdAUyGetf8
 //PRODUCT
 
 GET http://localhost:3000/product
 
 
 ###
-GET http://localhost:3000/product/asd
+GET http://localhost:3000/product/clvocpvgr0000otxrzthzs5d6
 
 ###
 POST http://localhost:3000/product HTTP/1.1
@@ -13,11 +13,11 @@ content-type: application/json
 Authorization: {{token}}
 
 {
-    "title": "nietzsche",
-    "description": "nietzsche",
-    "author": "nietzsche",
-    "stock": 10,
-    "price": 903,
+    "title": "miler",
+    "description": "miler",
+    "author": "miler",
+    "stock": 43,
+    "price": 1243,
     "image": "none.jpg"
 }
 
@@ -80,7 +80,7 @@ POST http://localhost:3000/cart/add/clvocrmeb000081xrbhbguz86 HTTP/1.1
 Authorization: {{token}}
 
 ###
-PATCH http://localhost:3000/cart/qty/clvofst540001fjvsgldyiwb5 HTTP/1.1
+PATCH http://localhost:3000/cart/qty/clvqs78fi0001546hixaxoef7 HTTP/1.1
 Content-Type: application/json
 Authorization: {{token}}
 
@@ -120,4 +120,5 @@ Authorization: {{token}}
 }
 
 ### 
-DELETE http://localhost:3000/reviews/del/clvpldezr0003r9et86o6fubb
+DELETE http://localhost:3000/reviews/del/clvpp9dat0001n12t4cwml86s
+Authorization: {{token}}
