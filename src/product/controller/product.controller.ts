@@ -12,7 +12,6 @@ export class ProductController {
 	@Public()
 	@Get(':id')
 	get(@Param() id: { id: string }) {
-		console.log(id);
 		return this.productService.get(id);
 	}
 
