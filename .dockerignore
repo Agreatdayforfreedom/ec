@@ -1,0 +1,11 @@
+/client
+/dist
+/node_modules
+
+.git
+.gitignore
+.eslintrc.js
+.prettier.rc
+.editorconfig
+*.md
+*.http

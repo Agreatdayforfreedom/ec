@@ -1,14 +1,15 @@
 @token = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNsdm9hOGNkYTAwMDBhNHB1dGdqcjA2NTciLCJlbWFpbCI6InRlc3RAdGV4dC5jb20iLCJjYXJ0IjoiY2x2b2E4Y2RhMDAwMWE0cHVjajRncWZ3OCIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTcxNDc0NjQzNSwiZXhwIjoxNzE0ODMyODM1fQ.RFTkrRSQmDTo04HMgHmLJjIet46Z7XGD1bdAUyGetf8
+@port = 4000
 //PRODUCT
 
-GET http://localhost:3000/product
+GET http://localhost:{{port}}/product
 
 
 ###
-GET http://localhost:3000/product/clvocpvgr0000otxrzthzs5d6
+GET http://localhost:{{port}}/product/clvocpvgr0000otxrzthzs5d6
 
 ###
-POST http://localhost:3000/product HTTP/1.1
+POST http://localhost:{{port}}/product HTTP/1.1
 content-type: application/json
 Authorization: {{token}}
 
@@ -24,13 +25,13 @@ Authorization: {{token}}
 
 ### #! AUTH 
 
-GET http://localhost:3000/auth/profile HTTP/1.1
+GET http://localhost:{{port}}/auth/profile HTTP/1.1
 Authorization: {{token}}
 
 
 ###
 
-POST http://localhost:3000/auth/signup HTTP/1.1
+POST http://localhost:{{port}}/auth/signup HTTP/1.1
 content-type: application/json
 
 {
@@ -41,7 +42,7 @@ content-type: application/json
 
 ###
 
-POST http://localhost:3000/auth/signin HTTP/1.1
+POST http://localhost:{{port}}/auth/signin HTTP/1.1
 content-type: application/json
 
 {
@@ -50,7 +51,7 @@ content-type: application/json
 }
 
 ### #! Metadata
-POST http://localhost:3000/metadata/add/asd
+POST http://localhost:{{port}}/metadata/add/asd
 content-type: application/json
 
 {
@@ -63,7 +64,7 @@ content-type: application/json
 
 ###
 
-PUT http://localhost:3000/metadata/update/clvmvt81e00057nst8exhie8j
+PUT http://localhost:{{port}}/metadata/update/clvmvt81e00057nst8exhie8j
 content-type: application/json
 
 {
@@ -72,15 +73,15 @@ content-type: application/json
 
 
 ### !CART
-GET http://localhost:3000/cart HTTP/1.1
+GET http://localhost:{{port}}/cart HTTP/1.1
 Authorization: {{token}}
 
 ###
-POST http://localhost:3000/cart/add/clvocrmeb000081xrbhbguz86 HTTP/1.1
+POST http://localhost:{{port}}/cart/add/clvocrmeb000081xrbhbguz86 HTTP/1.1
 Authorization: {{token}}
 
 ###
-PATCH http://localhost:3000/cart/qty/clvqs78fi0001546hixaxoef7 HTTP/1.1
+PATCH http://localhost:{{port}}/cart/qty/clvqs78fi0001546hixaxoef7 HTTP/1.1
 Content-Type: application/json
 Authorization: {{token}}
 
@@ -89,7 +90,7 @@ Authorization: {{token}}
 }
 
 ###
-DELETE http://localhost:3000/cart/del/clvofio8e0003cklaieuozi0u
+DELETE http://localhost:{{port}}/cart/del/clvofio8e0003cklaieuozi0u
 Authorization: {{token}}
 
 
@@ -97,11 +98,11 @@ Authorization: {{token}}
 
 ### REVIEWS
 
-GET http://localhost:3000/reviews/clvocrmeb000081xrbhbguz86
+GET http://localhost:{{port}}/reviews/clvocrmeb000081xrbhbguz86
 
 
 ###
-POST http://localhost:3000/reviews/send/clvocrmeb000081xrbhbguz86
+POST http://localhost:{{port}}/reviews/send/clvocrmeb000081xrbhbguz86
 Content-Type: application/json
 Authorization: {{token}}
 
@@ -111,7 +112,7 @@ Authorization: {{token}}
 }
 
 ###
-PATCH http://localhost:3000/reviews/update/clvpldezr0003r9et86o6fubb
+PATCH http://localhost:{{port}}/reviews/update/clvpldezr0003r9et86o6fubb
 Content-Type: application/json
 Authorization: {{token}}
 
@@ -120,5 +121,5 @@ Authorization: {{token}}
 }
 
 ### 
-DELETE http://localhost:3000/reviews/del/clvpp9dat0001n12t4cwml86s
+DELETE http://localhost:{{port}}/reviews/del/clvpp9dat0001n12t4cwml86s
 Authorization: {{token}}
