@@ -27,7 +27,6 @@ export class ReviewsService {
 
 		if (reviewed)
 			return new HttpException('You have already rated this book', 400);
-		console.log(payload);
 		try {
 			return await this.prisma.reviews.create({
 				data: {
