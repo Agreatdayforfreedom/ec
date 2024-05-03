@@ -12,8 +12,3 @@ RUN pnpm i
 COPY . /
 
 EXPOSE 4000
-
-
-
-
-
