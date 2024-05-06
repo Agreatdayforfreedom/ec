@@ -10,18 +10,22 @@ export class AuthService {
 		private jwtService: JwtService,
 	) {}
 
-	async signIn(email: string, pass: string): Promise<{ access_token: string }> {
+	async signIn(email: string, pass: string) {
 		const user = await this.userService.findOneByEmail(email);
-		if (user?.password !== pass) {
-			throw new UnauthorizedException();
+
+		if (user?.password !== pass || !user) {
+			throw new UnauthorizedException('Incorrect email or password');
 		}
 		const payload = {
 			id: user.id,
 			email: user.email,
+			username: user.username,
 			cart: user.cartId,
 			role: user.role,
 		};
+
 		return {
+			user: payload,
 			access_token: await this.jwtService.signAsync(payload),
 		};
 	}
