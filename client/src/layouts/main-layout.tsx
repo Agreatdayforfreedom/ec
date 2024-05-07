@@ -13,7 +13,7 @@ export const MainLayout = () => {
 	return (
 		<>
 			<Header />
-			<main className="bg-magic-700 h-full">
+			<main className="h-full">
 				<Outlet />
 			</main>
 		</>

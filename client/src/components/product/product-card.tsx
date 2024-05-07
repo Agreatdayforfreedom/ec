@@ -5,16 +5,8 @@ import {
 	CardHeader,
 } from '@/components/ui/card';
 import { Link } from 'react-router-dom';
+import { Product } from '@/interfaces';
 
-interface Product {
-	id: string;
-	image: string;
-	title: string;
-	description: string;
-	author: string;
-	price: number;
-	stock: number;
-}
 interface Props {
 	product: Product;
 }

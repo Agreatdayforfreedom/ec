@@ -75,6 +75,10 @@ body,
 	height: 100%;
 }
 
+body {
+	background-color: rgb(21 22 45);
+}
+
 * {
 	color: var(--text);
 }

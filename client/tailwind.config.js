@@ -52,6 +52,7 @@ module.exports = {
 					foreground: 'hsl(var(--card-foreground))',
 				},
 				magic: {
+					50: '#cfcce6',
 					100: '#d0b4bd',
 					200: '#b591a7',
 					300: '#9a7196',
