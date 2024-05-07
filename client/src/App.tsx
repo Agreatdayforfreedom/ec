@@ -1,11 +1,14 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { Signin } from './pages/signin';
-import { Signup } from './pages/signup';
-import { MainLayout } from './layouts/main-layout';
-import { Home } from './pages/home';
 import { Provider } from 'react-redux';
-import { store } from './store';
-import { AuthLayout } from './layouts/auth-layout';
+
+import { store } from '@/store';
+
+import { MainLayout } from '@/layouts/main-layout';
+import { AuthLayout } from '@/layouts/auth-layout';
+import { Signin } from '@/pages/signin';
+import { Signup } from '@/pages/signup';
+import { Home } from '@/pages/home';
+import { Product } from '@/pages/product';
 
 function App() {
 	return (
@@ -18,6 +21,7 @@ function App() {
 							<Route path="/signup" element={<Signup />} />
 						</Route>
 						<Route index element={<Home />} />
+						<Route path="/product/:id" element={<Product />} />
 					</Route>
 				</Routes>
 			</Provider>

@@ -14,7 +14,7 @@ export const Header = () => {
 	}, [user]);
 
 	return (
-		<div className="w-full h-20 bg-violet-900 flex justify-between">
+		<header className="w-full h-20 bg-magic-800 flex justify-between">
 			<h1>Header</h1>
 			{isAuth && !loading ? (
 				<>
@@ -26,6 +26,6 @@ export const Header = () => {
 					<Link to="/signin">Sign in</Link>
 				</>
 			)}
-		</div>
+		</header>
 	);
 };

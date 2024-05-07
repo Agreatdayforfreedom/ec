@@ -5,17 +5,17 @@ import { Navigate, Outlet } from 'react-router-dom';
 import { Header } from '../components/header';
 
 export const MainLayout = () => {
-	const { isAuth } = useAppSelector((state) => state.auth);
-
 	const dispatch = useAppDispatch();
 	useEffect(() => {
 		dispatch(profileThunk());
 	}, []);
 
 	return (
-		<div>
+		<>
 			<Header />
-			<Outlet />
-		</div>
+			<main className="bg-magic-700 h-full">
+				<Outlet />
+			</main>
+		</>
 	);
 };

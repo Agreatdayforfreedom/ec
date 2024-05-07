@@ -1,4 +1,4 @@
-@token = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNsdm9hOGNkYTAwMDBhNHB1dGdqcjA2NTciLCJlbWFpbCI6InRlc3RAdGV4dC5jb20iLCJjYXJ0IjoiY2x2b2E4Y2RhMDAwMWE0cHVjajRncWZ3OCIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTcxNDc0NjQzNSwiZXhwIjoxNzE0ODMyODM1fQ.RFTkrRSQmDTo04HMgHmLJjIet46Z7XGD1bdAUyGetf8
+@token = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNsdnY4MnU1ODAwMDA5aXV4cmh6MGNiNWYiLCJlbWFpbCI6InRlc3RAdGV4dC5jb20iLCJ1c2VybmFtZSI6InRlc3QiLCJjYXJ0IjoiY2x2djgydTU4MDAwMTlpdXhwbjg4aTIzayIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTcxNTA5MTM5MiwiZXhwIjoxNzE1MTc3NzkyfQ.KnVWuAKyBsNWabxHgy3IRsW4VYiejDwz-hZaKuvHaEc
 @port = 4000
 //PRODUCT
 
@@ -14,12 +14,12 @@ content-type: application/json
 Authorization: {{token}}
 
 {
-    "title": "miler",
-    "description": "miler",
-    "author": "miler",
-    "stock": 43,
-    "price": 1243,
-    "image": "none.jpg"
+    "title": "Thorns of Frost (Fae of Snow & Ice Book 2) ",
+    "description": "When an arranged marriage is forced upon Ilara, she must find a way to outwit the Court of Winter in order to escape her demanded fate.",
+    "author": "Krista Street",
+    "stock": 17,
+    "price": 15,
+    "image": "https://m.media-amazon.com/images/I/91TZiJpNxuL._SL1500_.jpg"
 }
 
 
