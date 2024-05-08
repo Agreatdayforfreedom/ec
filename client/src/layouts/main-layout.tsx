@@ -5,11 +5,6 @@ import { Navigate, Outlet } from 'react-router-dom';
 import { Header } from '../components/header';
 
 export const MainLayout = () => {
-	const dispatch = useAppDispatch();
-	useEffect(() => {
-		dispatch(profileThunk());
-	}, []);
-
 	return (
 		<>
 			<Header />
