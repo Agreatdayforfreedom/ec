@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 const SessionGuard = () => {
 	const { isAuth, loading } = useAppSelector((state) => state.auth);
 
-	if (loading) return <></>;
+	// if (loading) return <></>;
 	if (isAuth) return <Navigate to="/" />;
 	return <Outlet />;
 };

@@ -32,7 +32,7 @@ export const Nav = () => {
 				<>
 					<Link
 						className="hover:no-underline px-0  text-sm text-magic-600 hover:text-magic-600/60 font-semibold"
-						to="/signin"
+						to="/signup"
 					>
 						Sign up
 					</Link>
