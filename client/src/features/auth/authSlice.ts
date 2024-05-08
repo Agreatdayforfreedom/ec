@@ -1,9 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { profileThunk, signinThunk } from './authApi';
+import { User } from '@/interfaces';
 
 interface InitialState {
 	isAuth: boolean;
-	user: any;
+	user: User | undefined;
 	loading: boolean;
 	error: string | undefined;
 }

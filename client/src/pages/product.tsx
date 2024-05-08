@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Product as IProduct } from '@/interfaces';
 import { Button } from '../components/ui/button';
@@ -9,9 +9,7 @@ export const Product = () => {
 	const [product, setProduct] = useState<IProduct>();
 	useEffect(() => {
 		async function getAll() {
-			const result = await axios.get(
-				`http://localhost:4000/product/${params.id}`,
-			);
+			const result = await axios.get(`/product/${params.id}`);
 			setProduct(result.data);
 		}
 		getAll();

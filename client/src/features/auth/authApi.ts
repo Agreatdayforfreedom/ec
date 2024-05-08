@@ -3,9 +3,12 @@ import axios, { AxiosError, AxiosRequestConfig } from 'axios';
 
 export const signinThunk = createAsyncThunk(
 	'auth/signin',
-	async (payload: any, { rejectWithValue }) => {
+	async (payload: { email: string; password: string }, { rejectWithValue }) => {
+		if (!payload.email || !payload.password)
+			return rejectWithValue('All fields are required');
+
 		try {
-			const res = await axios.post('http://localhost:4000/auth/signin', {
+			const res = await axios.post('/auth/signin', {
 				email: payload.email,
 				password: payload.password,
 			});
@@ -28,7 +31,7 @@ export const profileThunk = createAsyncThunk('auth/profile', async () => {
 			Authorization: `Bearer ${token}`,
 		},
 	};
-	const res = await axios('http://localhost:4000/auth/profile', config);
+	const res = await axios('/auth/profile', config);
 
 	return res.data;
 });

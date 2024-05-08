@@ -14,11 +14,11 @@ export const Signin = () => {
 
 	const onSubmit = async (e: any) => {
 		e.preventDefault();
-		//TODO: SIGNUP AND STYLES
+
 		dispatch(
 			signinThunk({
-				email: inputEmailRef.current?.value,
-				password: inputPasswordRef.current?.value,
+				email: inputEmailRef.current?.value!,
+				password: inputPasswordRef.current?.value!,
 			}),
 		);
 	};

@@ -7,3 +7,15 @@ export interface Product {
 	price: number;
 	stock: number;
 }
+
+export enum ROLE {
+	USER,
+	ADMIN,
+}
+
+export interface User {
+	id: string;
+	username: string;
+	email: string;
+	role: ROLE;
+}

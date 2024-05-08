@@ -9,8 +9,10 @@ import { Signin } from '@/pages/signin';
 import { Signup } from '@/pages/signup';
 import { Home } from '@/pages/home';
 import { Product } from '@/pages/product';
+import axios from 'axios';
 
 function App() {
+	axios.defaults.baseURL = 'http://localhost:4000';
 	return (
 		<BrowserRouter>
 			<Provider store={store}>
