@@ -26,13 +26,17 @@ export class UserService {
 		const exists = await this.findOneByEmail(payload.email);
 		if (exists) return new HttpException('Email already registered', 400);
 
-		return await this.prisma.user.create({
-			data: {
-				...payload,
-				cart: {
-					create: {},
+		try {
+			return await this.prisma.user.create({
+				data: {
+					...payload,
+					cart: {
+						create: {},
+					},
 				},
-			},
-		});
+			});
+		} catch (error) {
+			return new HttpException('Internal Server Error', 500);
+		}
 	}
 }

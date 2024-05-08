@@ -31,6 +31,11 @@ export class AuthService {
 	}
 
 	async signup(payload: CreateUserDTO) {
-		await this.userService.create(payload);
+		let user = await this.userService.create(payload);
+
+		return {
+			user,
+			access_token: await this.jwtService.signAsync(user),
+		};
 	}
 }
