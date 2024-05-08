@@ -1,24 +1,50 @@
-import { useAppDispatch, useAppSelector } from '../hooks/rtk';
 import { Link } from 'react-router-dom';
-import { Button } from './ui/button';
-import { logout } from '../features/auth/authSlice';
+
+import { useAppDispatch, useAppSelector } from '@/hooks/rtk';
+import { logout } from '@/features/auth/authSlice';
+import { Button } from '@/components/ui/button';
+import { Separator } from '@/components/ui/separator';
 
 export const Nav = () => {
-	const { isAuth, loading, user } = useAppSelector((state) => state.auth);
+	const { isAuth, user } = useAppSelector((state) => state.auth);
 
 	const dispatch = useAppDispatch();
 
-	if (loading) return <div className="w-32 h-10 bg-red-800"></div>;
 	return (
-		<div>
+		<div className="h-full flex items-center space-x-2">
 			{isAuth && user ? (
 				<>
-					{user.username}
-					<Button onClick={() => dispatch(logout())}>Log out</Button>
+					<div className="text-sm text-magic-100 font-semibold">
+						Welcome <span>{user.username}</span>
+					</div>
+					<div className="h-8 w-px">
+						<Separator orientation="vertical" className="bg-magic-600" />
+					</div>
+					<Button
+						variant={'link'}
+						className="hover:no-underline px-0  text-magic-600 hover:text-magic-600/60 font-semibold"
+						onClick={() => dispatch(logout())}
+					>
+						Log out
+					</Button>
 				</>
 			) : (
 				<>
-					<Link to="/signin">Sign in</Link>
+					<Link
+						className="hover:no-underline px-0  text-sm text-magic-600 hover:text-magic-600/60 font-semibold"
+						to="/signin"
+					>
+						Sign up
+					</Link>
+					<div className="h-8 w-px">
+						<Separator orientation="vertical" className="bg-magic-600" />
+					</div>
+					<Link
+						className="hover:no-underline px-0 text-sm text-magic-600 hover:text-magic-600/60 font-semibold"
+						to="/signin"
+					>
+						Sign in
+					</Link>
 				</>
 			)}
 		</div>
