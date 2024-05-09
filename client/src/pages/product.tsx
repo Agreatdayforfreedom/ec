@@ -3,16 +3,17 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Product as IProduct } from '@/interfaces';
 import { Button } from '../components/ui/button';
+import { ReviewsSection } from './reviews-section';
 
 export const Product = () => {
 	const params = useParams();
 	const [product, setProduct] = useState<IProduct>();
 	useEffect(() => {
-		async function getAll() {
+		async function get() {
 			const result = await axios.get(`/product/${params.id}`);
 			setProduct(result.data);
 		}
-		getAll();
+		get();
 	}, []);
 
 	if (!product) return <p>loding</p>;
@@ -44,6 +45,9 @@ export const Product = () => {
 						</div>
 					</div>
 				</section>
+				<div>
+					<ReviewsSection reviews={product.reviews} />
+				</div>
 			</div>
 		</div>
 	);

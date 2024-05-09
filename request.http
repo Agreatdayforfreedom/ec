@@ -1,4 +1,4 @@
-@token = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNsdnY4MnU1ODAwMDA5aXV4cmh6MGNiNWYiLCJlbWFpbCI6InRlc3RAdGV4dC5jb20iLCJ1c2VybmFtZSI6InRlc3QiLCJjYXJ0IjoiY2x2djgydTU4MDAwMTlpdXhwbjg4aTIzayIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTcxNTA5MTM5MiwiZXhwIjoxNzE1MTc3NzkyfQ.KnVWuAKyBsNWabxHgy3IRsW4VYiejDwz-hZaKuvHaEc
+@token = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNsdnljcDFuazAwMDA5YWQ2eHdzbWZhMXMiLCJlbWFpbCI6InNvbWFAZ21haWwuY29tIiwidXNlcm5hbWUiOiJzb21hIiwiY2FydCI6ImNsdnljcDFuazAwMDE5YWQ2eGRvcWJ3bGwiLCJyb2xlIjoiVVNFUiIsImlhdCI6MTcxNTI2NjEwNSwiZXhwIjoxNzE1MzUyNTA1fQ.2HrYPCYOQC9HoZ-l_WFkGviKS61F1flFMZwJww2zoyw
 @port = 4000
 //PRODUCT
 
@@ -98,17 +98,17 @@ Authorization: {{token}}
 
 ### REVIEWS
 
-GET http://localhost:{{port}}/reviews/clvocrmeb000081xrbhbguz86
+GET http://localhost:{{port}}/reviews/clvwq1kkv0002kk8fds4mvofs
 
 
 ###
-POST http://localhost:{{port}}/reviews/send/clvocrmeb000081xrbhbguz86
+POST http://localhost:{{port}}/reviews/send/clvwq1kkv0002kk8fds4mvofs
 Content-Type: application/json
 Authorization: {{token}}
 
 {
-	"stars": 3,
-	"text": "good book lol"
+	"stars": 5,
+	"text": "good book "
 }
 
 ###

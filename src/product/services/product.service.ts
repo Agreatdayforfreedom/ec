@@ -13,6 +13,20 @@ export class ProductService {
 			},
 			include: {
 				metadata: true,
+				_count: {
+					select: { reviews: true },
+				},
+				reviews: {
+					include: {
+						user: {
+							select: {
+								id: true,
+								username: true,
+							},
+						},
+					},
+					take: 5,
+				},
 			},
 		});
 		if (!product) return new HttpException('Product not found', 404);

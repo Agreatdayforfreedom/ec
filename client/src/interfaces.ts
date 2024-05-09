@@ -6,6 +6,7 @@ export interface Product {
 	author: string;
 	price: number;
 	stock: number;
+	reviews: Review[];
 }
 
 export enum ROLE {
@@ -18,4 +19,11 @@ export interface User {
 	username: string;
 	email: string;
 	role: ROLE;
+}
+
+export interface Review {
+	id: string;
+	stars: number;
+	text: string;
+	user: Pick<User, 'id' | 'username'>;
 }
