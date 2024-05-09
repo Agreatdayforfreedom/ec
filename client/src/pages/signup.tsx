@@ -5,7 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useAppDispatch, useAppSelector } from '@/hooks/rtk';
-import { signinThunk, signupThunk } from '@/features/auth/authApi';
+import { signupThunk } from '@/features/auth/authApi';
 import {
 	Form,
 	FormControl,

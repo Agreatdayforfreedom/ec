@@ -1,11 +1,10 @@
-import { Navigate, Outlet, useNavigate } from 'react-router-dom';
+import { Navigate, Outlet } from 'react-router-dom';
 import { useAppSelector } from '../hooks/rtk';
-import { useEffect } from 'react';
 
 const SessionGuard = () => {
-	const { isAuth, loading } = useAppSelector((state) => state.auth);
+	const { isAuth, await_prof } = useAppSelector((state) => state.auth);
 
-	// if (loading) return <></>;
+	if (!await_prof) return <></>;
 	if (isAuth) return <Navigate to="/" />;
 	return <Outlet />;
 };

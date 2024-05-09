@@ -7,7 +7,7 @@ interface InitialState {
 	user: User | undefined;
 	loading: boolean;
 	error: string | undefined;
-	success: boolean;
+	await_prof: boolean;
 }
 
 let initialState: InitialState = {
@@ -15,7 +15,7 @@ let initialState: InitialState = {
 	user: undefined,
 	loading: true,
 	error: undefined,
-	success: false,
+	await_prof: false,
 };
 
 const authSlice = createSlice({
@@ -27,7 +27,6 @@ const authSlice = createSlice({
 			state.isAuth = false;
 			state.loading = false;
 			state.user = undefined;
-			state.success = false;
 		},
 	},
 	extraReducers: (builder) => {
@@ -36,38 +35,35 @@ const authSlice = createSlice({
 				state.isAuth = false;
 				state.loading = true;
 				state.error = undefined;
-				state.success = false;
 			})
 			.addCase(signinThunk.rejected, (state, action) => {
 				state.isAuth = false;
 				state.loading = false;
 				state.error = action.payload as string;
-				state.success = false;
 			})
 			.addCase(signinThunk.fulfilled, (state, action) => {
 				state.isAuth = true;
 				state.loading = false;
 				state.user = action.payload;
 				state.error = undefined;
-				state.success = true;
 			});
 
 		builder
 			.addCase(profileThunk.pending, (state, _action) => {
 				state.isAuth = false;
 				state.loading = true;
-				state.success = false;
+				state.await_prof = false;
 			})
 			.addCase(profileThunk.rejected, (state, _action) => {
 				state.isAuth = false;
 				state.loading = false;
-				state.success = false;
+				state.await_prof = true;
 			})
 			.addCase(profileThunk.fulfilled, (state, action) => {
 				state.isAuth = true;
 				state.loading = false;
 				state.user = action.payload;
-				state.success = true;
+				state.await_prof = true;
 			});
 	},
 });
