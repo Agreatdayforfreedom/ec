@@ -1,0 +1,10 @@
+.star_hovered {
+	fill: #afa649;
+	stroke: #afa64980;
+}
+
+.star_hovered_pointer {
+	fill: #afa649;
+	stroke: #afa64980;
+	cursor: pointer;
+}

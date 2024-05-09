@@ -26,4 +26,6 @@ export interface Review {
 	stars: number;
 	text: string;
 	user: Pick<User, 'id' | 'username'>;
+	created_at: Date;
+	updated_at: Date;
 }

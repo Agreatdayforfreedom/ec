@@ -45,10 +45,8 @@ export const Product = () => {
 						</div>
 					</div>
 				</section>
-				<div>
-					<ReviewsSection reviews={product.reviews} />
-				</div>
 			</div>
+			<ReviewsSection reviews={product.reviews} />
 		</div>
 	);
 };
