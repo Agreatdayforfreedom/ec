@@ -6,11 +6,14 @@ import {
 	Param,
 	Patch,
 	Post,
+	Query,
 	Request,
 } from '@nestjs/common';
 import { CreateReviewDTO, UpdateReviewDTO } from '../dto/reviews.dto';
 import { ReviewsService } from '../services/reviews.service';
 import { Public } from '../../auth/public.decorator';
+import { Query as IQuery } from '../../types';
+import { QueryPipeTransform } from '../../pipes/query.pipe';
 
 @Controller('reviews')
 export class ReviewsController {
@@ -18,8 +21,11 @@ export class ReviewsController {
 
 	@Public()
 	@Get('/:productId')
-	getReviews(@Param('productId') productId: string) {
-		return this.reviewsService.getReviews(productId);
+	getReviews(
+		@Param('productId') productId: string,
+		@Query(QueryPipeTransform) query: IQuery,
+	) {
+		return this.reviewsService.getReviews(productId, query);
 	}
 
 	@Post('/send/:productId')

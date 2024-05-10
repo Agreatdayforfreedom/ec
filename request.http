@@ -98,7 +98,8 @@ Authorization: {{token}}
 
 ### REVIEWS
 
-GET http://localhost:{{port}}/reviews/clvwq1kkv0002kk8fds4mvofs
+GET http://localhost:{{port}}/reviews/clvwq1kkv0002kk8fds4mvofs?take=2&stars=3
+
 
 
 ###

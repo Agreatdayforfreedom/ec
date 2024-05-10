@@ -1,15 +1,17 @@
 import { HttpException, Injectable } from '@nestjs/common';
 import { PrismaService } from '../../prisma.service';
 import { CreateReviewDTO, UpdateReviewDTO } from '../dto/reviews.dto';
+import { Query } from '../../types';
 
 @Injectable()
 export class ReviewsService {
 	constructor(private prisma: PrismaService) {}
 
-	async getReviews(productId: string) {
-		let x = await this.prisma.reviews.findMany({
+	async getReviews(productId: string, query: Query) {
+		return await this.prisma.reviews.findMany({
 			where: {
 				productId,
+				...(query.stars ? { stars: query.stars } : {}),
 			},
 			include: {
 				user: {
@@ -20,27 +22,12 @@ export class ReviewsService {
 				},
 			},
 			orderBy: {
-				created_at: 'desc',
+				created_at: (query.order_by as any) || 'desc',
 			},
-			take: 5,
+			skip: query.skip,
+			take: query.take,
 		});
-		console.log(x);
-		return x;
 	}
-	// _count: {
-	// 	select: { reviews: true },
-	// },
-	// reviews: {
-	// 	include: {
-	// 		user: {
-	// 			select: {
-	// 				id: true,
-	// 				username: true,
-	// 			},
-	// 		},
-	// 	},
-	// 	take: 5,
-	// },
 
 	async create(payload: CreateReviewDTO, userId: string, productId: string) {
 		if (payload.stars && (payload.stars < 0 || payload.stars > 5))

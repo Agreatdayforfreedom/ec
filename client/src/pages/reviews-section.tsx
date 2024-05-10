@@ -1,11 +1,12 @@
 import { ChevronDown } from 'lucide-react';
 
 import Review from '@/components/review/review';
-import { Review as IReview } from '@/interfaces';
+import { Review as IReview, Query } from '@/interfaces';
 import { Separator } from '@/components/ui/separator';
 import { Button } from '@/components/ui/button';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { ReviewActions } from '../components/review/review-actions';
 
 interface Props {
 	productId: string;
@@ -25,6 +26,16 @@ export const ReviewsSection = ({ productId }: Props) => {
 		getAll();
 	}, []);
 
+	const filterBy = async ({ order_by, stars }: Query) => {
+		setLoading(true);
+
+		const reviews = await axios(
+			`/reviews/${productId}?stars=${stars}&order_by=${order_by}`,
+		);
+		setReviews(reviews.data);
+		setLoading(false);
+	};
+
 	if (loading || !reviews) return <p>loading...</p>;
 	return (
 		<div className="p-3 justify-between space-y-3">
@@ -32,22 +43,7 @@ export const ReviewsSection = ({ productId }: Props) => {
 			<Separator orientation="horizontal" className="bg-magic-100" />
 			<div className="md:w-3/4 flex flex-col md:flex-row justify-around ">
 				<div className="flex-1 mx-3 space-y-5">
-					<div className="flex justify-end space-x-3">
-						<Button
-							variant="magic"
-							className="rounded-lg h-8 pr-1.5"
-							size={'sm'}
-						>
-							Order by <ChevronDown size={18} className="mt-1 ml-1" />
-						</Button>
-						<Button
-							variant="magic"
-							className="rounded-lg h-8 pr-1.5"
-							size={'sm'}
-						>
-							Rating <ChevronDown size={18} className="mt-1 ml-1" />
-						</Button>
-					</div>
+					<ReviewActions filterBy={filterBy} />
 					{reviews.map((r) => (
 						<Review review={r} />
 					))}
