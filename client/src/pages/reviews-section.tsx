@@ -4,7 +4,7 @@ import Review from '@/components/review/review';
 import { Review as IReview } from '@/interfaces';
 import { Separator } from '@/components/ui/separator';
 import { Button } from '@/components/ui/button';
-import { useEffect, useState, useTransition } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 
 interface Props {

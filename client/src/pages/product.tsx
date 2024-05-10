@@ -48,9 +48,7 @@ export const Product = () => {
 								${product.price}
 							</span>
 							<div>
-								<Button className="bg-magic-550 hover:bg-magic-550/75">
-									Add to card
-								</Button>
+								<Button variant="magic">Add to card</Button>
 							</div>
 						</div>
 					</div>
