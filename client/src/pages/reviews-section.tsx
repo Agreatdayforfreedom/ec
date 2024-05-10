@@ -1,15 +1,31 @@
+import { ChevronDown } from 'lucide-react';
+
 import Review from '@/components/review/review';
 import { Review as IReview } from '@/interfaces';
 import { Separator } from '@/components/ui/separator';
-import { ReviewForm } from '@/components/review/review-form';
-import { Button } from '../components/ui/button';
-import { ArrowDown, ChevronDown } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { useEffect, useState, useTransition } from 'react';
+import axios from 'axios';
 
 interface Props {
-	reviews: IReview[];
+	productId: string;
 }
 
-export const ReviewsSection = ({ reviews }: Props) => {
+export const ReviewsSection = ({ productId }: Props) => {
+	const [reviews, setReviews] = useState<IReview[]>();
+	const [loading, setLoading] = useState<boolean>(false);
+
+	useEffect(() => {
+		setLoading(true);
+		async function getAll() {
+			const reviews = await axios(`/reviews/${productId}`);
+			setReviews(reviews.data);
+			setLoading(false);
+		}
+		getAll();
+	}, []);
+
+	if (loading || !reviews) return <p>loading...</p>;
 	return (
 		<div className="p-3 justify-between space-y-3">
 			<h2 className="text-2xl">Reviews</h2>

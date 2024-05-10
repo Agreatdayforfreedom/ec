@@ -1,37 +1,41 @@
 import { HttpException, Injectable } from '@nestjs/common';
 import { PrismaService } from '../../prisma.service';
 import { CreateProductDTO } from '../dto/product.dto';
+import { Product } from '@prisma/client';
+
+export interface ProductExtraKeys {
+	totalReviews: number;
+	averageRate: number;
+}
 
 @Injectable()
 export class ProductService {
 	constructor(private readonly prisma: PrismaService) {}
 
-	async get({ id }: { id: string }) {
+	async get({ id }: { id: string }): Promise<Product & ProductExtraKeys> {
 		const product = await this.prisma.product.findUnique({
 			where: {
 				id,
 			},
 			include: {
 				metadata: true,
-				_count: {
-					select: { reviews: true },
-				},
-				reviews: {
-					include: {
-						user: {
-							select: {
-								id: true,
-								username: true,
-							},
-						},
-					},
-					take: 5,
-				},
 			},
 		});
-		if (!product) return new HttpException('Product not found', 404);
-
-		return product;
+		let reviewsRate = await this.prisma.reviews.aggregate({
+			where: {
+				productId: product.id,
+			},
+			_sum: {
+				stars: true,
+			},
+			_count: true,
+		});
+		if (!product) throw new HttpException('Product not found', 404);
+		return {
+			...product,
+			totalReviews: reviewsRate._count,
+			averageRate: reviewsRate._sum.stars / reviewsRate._count,
+		};
 	}
 
 	async getAll() {

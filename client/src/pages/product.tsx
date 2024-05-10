@@ -1,8 +1,11 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+
 import { Product as IProduct } from '@/interfaces';
-import { Button } from '../components/ui/button';
+import { Button } from '@/components/ui/button';
+import { Stars } from '@/components/review/stars';
+
 import { ReviewsSection } from './reviews-section';
 
 export const Product = () => {
@@ -15,7 +18,7 @@ export const Product = () => {
 		}
 		get();
 	}, []);
-
+	console.log(product);
 	if (!product) return <p>loding</p>;
 	return (
 		<div className="pt-5">
@@ -31,6 +34,13 @@ export const Product = () => {
 					<div className="p-3 space-y-5">
 						<div>
 							<h2 className="text-2xl font-semibold">{product.title}</h2>
+							<div className="mt-2 ml-2 flex items-end space-x-1">
+								<span className="text-magic-300 mr-1">
+									{product.averageRate}
+								</span>
+								<Stars _static size={20} stars={product.averageRate} />
+								<span className="">({product.totalReviews})</span>
+							</div>
 							<p className="mx-2 mt-5 text-magic-50">{product.description}</p>
 						</div>
 						<div className="flex items-center justify-between">
@@ -46,7 +56,7 @@ export const Product = () => {
 					</div>
 				</section>
 			</div>
-			<ReviewsSection reviews={product.reviews} />
+			<ReviewsSection productId={product.id} />
 		</div>
 	);
 };
