@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom';
+
 import { Nav } from './nav';
+import { Search } from './search';
 
 export const Header = () => {
 	return (
@@ -7,6 +9,7 @@ export const Header = () => {
 			<Link to="/" aria-label="home logo link">
 				<img src="/logo.png" className="w-16 h-16 object-contain m-2" />
 			</Link>
+			<Search />
 			<Nav />
 		</header>
 	);

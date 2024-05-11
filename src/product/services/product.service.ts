@@ -2,6 +2,7 @@ import { HttpException, Injectable } from '@nestjs/common';
 import { PrismaService } from '../../prisma.service';
 import { CreateProductDTO } from '../dto/product.dto';
 import { Product } from '@prisma/client';
+import { Query } from '../../types';
 
 export interface ProductExtraKeys {
 	totalReviews: number;
@@ -38,8 +39,15 @@ export class ProductService {
 		};
 	}
 
-	async getAll() {
-		return await this.prisma.product.findMany();
+	async getAll(query: Query) {
+		return await this.prisma.product.findMany({
+			where: {
+				title: {
+					contains: query.search,
+					mode: 'insensitive',
+				},
+			},
+		});
 	}
 
 	async create(payload: CreateProductDTO) {

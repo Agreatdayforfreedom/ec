@@ -1,9 +1,12 @@
-import { Body, Controller, Get, Param, Post, Request } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
+import { Role } from '@prisma/client';
+
 import { ProductService } from '../services/product.service';
 import { CreateProductDTO } from '../dto/product.dto';
 import { Public } from '../../auth/public.decorator';
 import { Roles } from '../../auth/roles.decorator';
-import { Role } from '@prisma/client';
+import { QueryPipeTransform } from '../../pipes/query.pipe';
+import { Query as IQuery } from '../../types';
 
 @Controller('product')
 export class ProductController {
@@ -17,8 +20,8 @@ export class ProductController {
 
 	@Public()
 	@Get()
-	getAll() {
-		return this.productService.getAll();
+	getAll(@Query(QueryPipeTransform) query: IQuery) {
+		return this.productService.getAll(query);
 	}
 
 	@Post()
