@@ -43,11 +43,10 @@ export class ProductService {
 		let [products, count] = await this.prisma.$transaction([
 			this.prisma.product.findMany({
 				where: this.getAll_body(query).where,
-				orderBy: this.getAll_body(query).order_by,
+				orderBy: this.getAll_body(query).orderBy,
 			}),
 			this.prisma.product.count({
 				where: this.getAll_body(query).where,
-				orderBy: this.getAll_body(query).order_by,
 			}),
 		]);
 
@@ -84,7 +83,8 @@ export class ProductService {
 				],
 			},
 			orderBy: {
-				price: query.order_by,
+				price: query.or_price,
+				// stars: query.or_stars,
 			},
 		};
 	}

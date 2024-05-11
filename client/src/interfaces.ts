@@ -49,6 +49,9 @@ export type Query = {
 	min_price?: number;
 	max_price?: number;
 
+	//order by price or stars
+	or_price?: ORDER_BY;
+	or_stars?: ORDER_BY;
 	//rating
 	//1 - 5
 	stars?: number;
