@@ -1,4 +1,5 @@
 import { Star } from 'lucide-react';
+import { useState } from 'react';
 
 import {
 	Select,
@@ -6,20 +7,30 @@ import {
 	SelectItem,
 	SelectTrigger,
 } from '@/components/ui/select';
-import { ORDER_BY, Query } from '@/interfaces';
 import { SelectValue } from '@radix-ui/react-select';
-import { useState } from 'react';
+import { ORDER_BY, Query } from '@/interfaces';
+import useQueryParams from '@/hooks/use-query-params';
+import { useSearchParams } from 'react-router-dom';
 
 interface Props {
 	filterBy: (query: Query) => void;
 }
 
 export const ReviewActions = ({ filterBy }: Props) => {
-	const [starsValue, setStarsValue] = useState('');
-	const [orderByValue, setOrderByValue] = useState(ORDER_BY.ASC);
+	const [params] = useSearchParams();
+
+	const [orderByValue, setOrderByValue] = useState(
+		(params.get('order_by') as ORDER_BY) || ORDER_BY.ASC,
+	);
+	const [starsValue, setStarsValue] = useState(
+		(params.get('stars') as string) || '',
+	);
+
+	const [_, setParams] = useQueryParams();
 
 	const onOrderByChange = (value: ORDER_BY) => {
 		setOrderByValue(value);
+		setParams({ order_by: value });
 		filterBy({
 			stars: parseInt(starsValue, 10),
 			order_by: value,
@@ -28,6 +39,8 @@ export const ReviewActions = ({ filterBy }: Props) => {
 
 	const onStarsChange = (value: string) => {
 		setStarsValue(value);
+		setParams({ stars: value });
+
 		filterBy({
 			stars: parseInt(value, 10),
 			order_by: orderByValue,
