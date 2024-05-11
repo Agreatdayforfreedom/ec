@@ -1,5 +1,7 @@
 import { Review as IReview } from '@/interfaces';
 
+import Loader from '@/components/loader';
+
 import Review from './review';
 
 interface Props {
@@ -9,7 +11,7 @@ interface Props {
 }
 
 export const Reviews = ({ reviews, loading, count }: Props) => {
-	if (loading) return <p>loading</p>;
+	if (loading) return <Loader />;
 	if (count === 0)
 		return (
 			<span className="flex justify-center mt-3 text-2xl font-semibold">

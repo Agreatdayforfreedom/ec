@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom';
 import { Product as IProduct } from '@/interfaces';
 import { Button } from '@/components/ui/button';
 import { Stars } from '@/components/review/stars';
+import Loader from '@/components/loader';
 
 import { ReviewsSection } from './reviews-section';
 
@@ -18,7 +19,7 @@ export const Product = () => {
 		}
 		get();
 	}, []);
-	if (!product) return <p>loding</p>;
+	if (!product) return <Loader />;
 	return (
 		<div className="pt-5">
 			<div className="md:flex md:max-w-[95%]  mx-auto">
