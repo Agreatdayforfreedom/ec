@@ -45,6 +45,7 @@ export type Query = {
 	skip?: number;
 	order_by?: ORDER_BY;
 	search?: string;
+	page?: number;
 
 	//rating
 	//1 - 5

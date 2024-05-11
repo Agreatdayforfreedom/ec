@@ -55,9 +55,9 @@ export const ReviewActions = ({ filterBy }: Props) => {
 				</SelectTrigger>
 				<SelectContent className="bg-magic-500 border-magic-550/50">
 					{[...Array(6)].map((_, i) => {
-						console.log(i);
 						return (
 							<SelectItem
+								key={i}
 								value={i.toString()}
 								className="focus:bg-magic-550  cursor-pointer"
 							>

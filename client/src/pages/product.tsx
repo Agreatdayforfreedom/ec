@@ -18,7 +18,6 @@ export const Product = () => {
 		}
 		get();
 	}, []);
-	console.log(product);
 	if (!product) return <p>loding</p>;
 	return (
 		<div className="pt-5">

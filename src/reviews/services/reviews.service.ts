@@ -8,25 +8,37 @@ export class ReviewsService {
 	constructor(private prisma: PrismaService) {}
 
 	async getReviews(productId: string, query: Query) {
-		return await this.prisma.reviews.findMany({
-			where: {
-				productId,
-				...(query.stars ? { stars: query.stars } : {}),
-			},
-			include: {
-				user: {
-					select: {
-						id: true,
-						username: true,
+		const [reviews, count] = await this.prisma.$transaction([
+			this.prisma.reviews.findMany({
+				where: {
+					productId,
+					...(query.stars ? { stars: query.stars } : {}),
+				},
+				include: {
+					user: {
+						select: {
+							id: true,
+							username: true,
+						},
 					},
 				},
-			},
-			orderBy: {
-				created_at: (query.order_by as any) || 'desc',
-			},
-			skip: query.skip,
-			take: query.take,
-		});
+				orderBy: {
+					created_at: (query.order_by as any) || 'desc',
+				},
+				skip: query.skip,
+				take: query.take,
+			}),
+			this.prisma.reviews.count({
+				where: {
+					...(query.stars ? { stars: query.stars } : {}),
+				},
+			}),
+		]);
+
+		return {
+			count,
+			reviews,
+		};
 	}
 
 	async create(payload: CreateReviewDTO, userId: string, productId: string) {
