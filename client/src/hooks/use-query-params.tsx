@@ -4,8 +4,8 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 
 export interface Obj {
 	search?: string;
-	maxPrice?: string;
-	minPrice?: string;
+	max_price?: string;
+	min_price?: string;
 	order_by?: string;
 	skip?: string;
 	take?: string;

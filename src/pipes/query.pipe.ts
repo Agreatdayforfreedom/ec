@@ -19,6 +19,12 @@ export class QueryPipeTransform implements PipeTransform {
 			value.stars = parseInt(value.stars, 10);
 		else value.stars = 0;
 
+		if (value.min_price && typeof value.min_price === 'string')
+			value.min_price = parseInt(value.min_price, 10);
+
+		if (value.max_price && typeof value.max_price === 'string')
+			value.max_price = parseInt(value.max_price, 10);
+
 		if (!value.search) value.search = '';
 		if (!value.order_by) value.order_by = ORDER_BY.DESC;
 

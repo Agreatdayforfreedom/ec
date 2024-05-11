@@ -8,6 +8,8 @@ export type Query = {
 	skip?: number;
 	order_by?: ORDER_BY;
 	search?: string;
+	min_price?: number;
+	max_price?: number;
 
 	//rating
 	//1 - 5

@@ -1,4 +1,4 @@
-@token = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNsdnljcDFuazAwMDA5YWQ2eHdzbWZhMXMiLCJlbWFpbCI6InNvbWFAZ21haWwuY29tIiwidXNlcm5hbWUiOiJzb21hIiwiY2FydCI6ImNsdnljcDFuazAwMDE5YWQ2eGRvcWJ3bGwiLCJyb2xlIjoiVVNFUiIsImlhdCI6MTcxNTI2NjEwNSwiZXhwIjoxNzE1MzUyNTA1fQ.2HrYPCYOQC9HoZ-l_WFkGviKS61F1flFMZwJww2zoyw
+@token = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNsdnY4MnU1ODAwMDA5aXV4cmh6MGNiNWYiLCJlbWFpbCI6InRlc3RAdGV4dC5jb20iLCJ1c2VybmFtZSI6InRlc3QiLCJjYXJ0IjoiY2x2djgydTU4MDAwMTlpdXhwbjg4aTIzayIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTcxNTQ1NTY4NiwiZXhwIjoxNzE1NTQyMDg2fQ.d3b7y7L0-x65-HQPKvkXHdqMwcwQsYHAjbYPR5fFimE
 @port = 4000
 //PRODUCT
 
@@ -14,12 +14,12 @@ content-type: application/json
 Authorization: {{token}}
 
 {
-    "title": "Thorns of Frost (Fae of Snow & Ice Book 2) ",
-    "description": "When an arranged marriage is forced upon Ilara, she must find a way to outwit the Court of Winter in order to escape her demanded fate.",
-    "author": "Krista Street",
-    "stock": 17,
-    "price": 15,
-    "image": "https://m.media-amazon.com/images/I/91TZiJpNxuL._SL1500_.jpg"
+	"title": "Harry Potter and the Philosopher's Stone",
+	"description": "Turning the envelope over, his hand trembling, Harry saw a purple wax seal bearing a coat of arms; a lion, an eagle, a badger and a snake surrounding a large letter 'H'.\n\nHarry Potter has never even heard of Hogwarts when the letters start dropping on the doormat at number four, Privet Drive. Addressed in green ink on yellowish parchment with a purple seal, they are swiftly confiscated by his grisly aunt and uncle. Then, on Harry's eleventh birthday, a great beetle-eyed giant of a man called Rubeus Hagrid bursts in with some astonishing news: Harry Potter is a wizard, and he has a place at Hogwarts School of Witchcraft and Wizardry. An incredible adventure is about to begin!",
+	"author": "J.K. Rowling",
+	"stock": 23,
+	"price": 7,
+	"image": "https://m.media-amazon.com/images/I/81m9fP+LIPL._SL1500_.jpg"
 }
 
 

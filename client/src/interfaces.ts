@@ -46,6 +46,8 @@ export type Query = {
 	order_by?: ORDER_BY;
 	search?: string;
 	page?: number;
+	min_price?: number;
+	max_price?: number;
 
 	//rating
 	//1 - 5

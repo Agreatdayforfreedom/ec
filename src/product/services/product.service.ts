@@ -1,7 +1,7 @@
 import { HttpException, Injectable } from '@nestjs/common';
 import { PrismaService } from '../../prisma.service';
 import { CreateProductDTO } from '../dto/product.dto';
-import { Product } from '@prisma/client';
+import { Prisma, Product } from '@prisma/client';
 import { Query } from '../../types';
 
 export interface ProductExtraKeys {
@@ -40,19 +40,52 @@ export class ProductService {
 	}
 
 	async getAll(query: Query) {
-		return await this.prisma.product.findMany({
-			where: {
-				title: {
-					contains: query.search,
-					mode: 'insensitive',
-				},
-			},
-		});
+		let [products, count] = await this.prisma.$transaction([
+			this.prisma.product.findMany({
+				where: this.getAll_body(query).where,
+				orderBy: this.getAll_body(query).order_by,
+			}),
+			this.prisma.product.count({
+				where: this.getAll_body(query).where,
+				orderBy: this.getAll_body(query).order_by,
+			}),
+		]);
+
+		return {
+			products,
+			count,
+		};
 	}
 
 	async create(payload: CreateProductDTO) {
 		return await this.prisma.product.create({
 			data: payload,
 		});
+	}
+
+	private getAll_body(query: Query): any {
+		return {
+			where: {
+				title: {
+					contains: query.search,
+					mode: 'insensitive',
+				},
+				AND: [
+					{
+						price: {
+							lte: query.max_price,
+						},
+					},
+					{
+						price: {
+							gte: query.min_price,
+						},
+					},
+				],
+			},
+			orderBy: {
+				price: query.order_by,
+			},
+		};
 	}
 }

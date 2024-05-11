@@ -83,6 +83,16 @@ body {
 	color: var(--text);
 }
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+	/* display: none; <- Crashes Chrome on hover */
+	-webkit-appearance: none;
+}
+
+input[type='number'] {
+	-moz-appearance: textfield; /* Firefox */
+}
+
 @layer base {
 	* {
 		@apply border-border;

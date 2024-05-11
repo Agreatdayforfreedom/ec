@@ -13,14 +13,10 @@ interface Props {
 
 export const ProductCard = ({ product }: Props) => {
 	return (
-		<Card className="w-52 p-3 rounded-none bg-transparent border-none ">
+		<Card className="p-3 rounded-none w-fit mx-auto bg-transparent border-none ">
 			<CardHeader className="p-0 m-0 hover:shadow-lg hover:shadow-magic-100/30">
 				<Link to={`/product/${product.id}`}>
-					<img
-						src={product.image}
-						alt={product.title}
-						className="h-64 w-full"
-					/>
+					<img src={product.image} alt={product.title} />
 				</Link>
 			</CardHeader>
 			<CardContent className="p-0 flex flex-col">
