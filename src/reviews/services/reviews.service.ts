@@ -31,6 +31,7 @@ export class ReviewsService {
 			this.prisma.reviews.count({
 				where: {
 					...(query.stars ? { stars: query.stars } : {}),
+					productId,
 				},
 			}),
 		]);
@@ -63,7 +64,6 @@ export class ReviewsService {
 				},
 			});
 		} catch (error) {
-			console.log(error);
 			return new HttpException('Internal Server Error', 500);
 		}
 	}
