@@ -29,7 +29,17 @@ export const FilterByStars = ({ onCloseSheet }: Props) => {
 			<span className="font-bold">Filter by Stars</span>
 
 			<div className="space-y-2">
-				<button onClick={() => onClick(0)}>All</button>
+				<div className="flex justify-center mt-2">
+					<button
+						onClick={() => onClick(0)}
+						className={cn(
+							'font-mono rounded-full w-12 h-6',
+							cStar === 0 && 'bg-magic-500/50 ',
+						)}
+					>
+						All
+					</button>
+				</div>
 				{[...Array(5)].map((_, i) => (
 					<button
 						key={i}
