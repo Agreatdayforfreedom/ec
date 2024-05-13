@@ -20,9 +20,8 @@ export const Home = () => {
 	}, [params]);
 
 	return (
-		<section className="flex">
+		<section className="md:flex">
 			<Filters />
-
 			<div className="flex flex-col items-end px-2 w-full">
 				<OrderBy />
 				{loading ? (
