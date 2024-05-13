@@ -81,6 +81,13 @@ export class ProductService {
 						},
 					},
 				],
+				//TODO:
+				// reviews: {
+				// some: {
+				// 	stars: {
+				// 	},
+				// },
+				// },
 			},
 			orderBy: {
 				price: query.or_price,
