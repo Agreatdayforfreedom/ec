@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import axios, { Axios, AxiosError, AxiosRequestConfig } from 'axios';
+import axios, { AxiosError, AxiosRequestConfig } from 'axios';
 
 export const getCartThunk = createAsyncThunk(
 	'cart/get',
@@ -55,6 +55,28 @@ export const updateQtyThunk = createAsyncThunk(
 				// console.log(res.data);
 				return rejectWithValue(res.data.response);
 			}
+
+			return res.data;
+		} catch (error) {
+			if (error instanceof AxiosError) {
+				return rejectWithValue(error.response?.data.message);
+			}
+		}
+	},
+);
+
+export const deleteItemThunk = createAsyncThunk(
+	'cart/deleteItem',
+	async (id: string, { rejectWithValue }) => {
+		try {
+			const token = localStorage.getItem('access_token');
+
+			const config: AxiosRequestConfig = {
+				headers: {
+					Authorization: `Bearer ${token}`,
+				},
+			};
+			const res = await axios.delete(`/cart/del/${id}`, config);
 
 			return res.data;
 		} catch (error) {

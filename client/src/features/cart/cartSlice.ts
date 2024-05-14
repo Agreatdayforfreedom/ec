@@ -1,5 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { addItemThunk, getCartThunk, updateQtyThunk } from './cartApi';
+import {
+	addItemThunk,
+	deleteItemThunk,
+	getCartThunk,
+	updateQtyThunk,
+} from './cartApi';
 import { Cart_Item } from '@/interfaces';
 
 type StateError = {
@@ -66,6 +71,18 @@ const cartSlice = createSlice({
 				state.success = true;
 				state.loading = false;
 				state.error = undefined;
+			});
+
+		builder
+			.addCase(deleteItemThunk.pending, (state, _) => {
+				state.error = undefined;
+				state.loading = true;
+				state.success = false;
+			})
+			.addCase(deleteItemThunk.rejected, (_, __) => {})
+			.addCase(deleteItemThunk.fulfilled, (state, action) => {
+				state.loading = false;
+				state.items = state.items.filter((x) => x.id !== action.payload.id);
 			});
 	},
 });

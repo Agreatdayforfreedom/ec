@@ -1,9 +1,9 @@
-import { ChangeEvent, useEffect, useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { Cart_Item } from '@/interfaces';
 import { useAppDispatch, useAppSelector } from '@/hooks/rtk';
-import { updateQtyThunk } from '@/features/cart/cartApi';
+import { deleteItemThunk, updateQtyThunk } from '@/features/cart/cartApi';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
@@ -18,6 +18,10 @@ export const CartItem = ({ item }: Props) => {
 	const { loading, error } = useAppSelector((state) => state.cart);
 	const UpdateQty = () => {
 		dispatch(updateQtyThunk({ id: item.id, qty: updateQty }));
+	};
+
+	const onDelete = () => {
+		dispatch(deleteItemThunk(item.id));
 	};
 
 	return (
@@ -55,7 +59,13 @@ export const CartItem = ({ item }: Props) => {
 					</div>
 
 					<Separator orientation="vertical" className="bg-magic-600 h-3/4" />
-					<button>Delete</button>
+					<button
+						onClick={onDelete}
+						disabled={loading}
+						className="hover:text-red-500"
+					>
+						Delete
+					</button>
 				</div>
 				{error && error.id === item.id && (
 					<p className="text-sm text-red-500">{error.message}</p>
