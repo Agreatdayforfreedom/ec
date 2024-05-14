@@ -1,4 +1,4 @@
-@token = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNsdnY4MnU1ODAwMDA5aXV4cmh6MGNiNWYiLCJlbWFpbCI6InRlc3RAdGV4dC5jb20iLCJ1c2VybmFtZSI6InRlc3QiLCJjYXJ0IjoiY2x2djgydTU4MDAwMTlpdXhwbjg4aTIzayIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTcxNTQ1NTY4NiwiZXhwIjoxNzE1NTQyMDg2fQ.d3b7y7L0-x65-HQPKvkXHdqMwcwQsYHAjbYPR5fFimE
+@token = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNsdnY4MnU1ODAwMDA5aXV4cmh6MGNiNWYiLCJlbWFpbCI6InRlc3RAdGV4dC5jb20iLCJ1c2VybmFtZSI6InRlc3QiLCJjYXJ0IjoiY2x2djgydTU4MDAwMTlpdXhwbjg4aTIzayIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTcxNTcwODUyNywiZXhwIjoxNzE1Nzk0OTI3fQ.-4Ni7yBwMxtA10MYur7MEuTFSDD4zQdiDyva5tsfwm8
 @port = 4000
 //PRODUCT
 
@@ -77,7 +77,7 @@ GET http://localhost:{{port}}/cart HTTP/1.1
 Authorization: {{token}}
 
 ###
-POST http://localhost:{{port}}/cart/add/clvocrmeb000081xrbhbguz86 HTTP/1.1
+POST http://localhost:{{port}}/cart/add/clvwh523z0000kk8f2znrz2ux HTTP/1.1
 Authorization: {{token}}
 
 ###

@@ -40,6 +40,13 @@ export enum ORDER_BY {
 	DESC = 'desc',
 }
 
+export type Cart_Item = {
+	id: string;
+	qty: number;
+	totalPrice: number;
+	product: Product;
+};
+
 export type Query = {
 	take?: number; //limit
 	skip?: number;

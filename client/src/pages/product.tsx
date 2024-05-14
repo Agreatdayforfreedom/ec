@@ -8,10 +8,15 @@ import { Stars } from '@/components/review/stars';
 import Loader from '@/components/loader';
 
 import { ReviewsSection } from './reviews-section';
+import { useAppDispatch } from '../hooks/rtk';
+import { addItemThunk } from '../features/cart/cartApi';
 
 export const Product = () => {
 	const params = useParams();
 	const [product, setProduct] = useState<IProduct>();
+
+	const dispatch = useAppDispatch();
+
 	useEffect(() => {
 		async function get() {
 			const result = await axios.get(`/product/${params.id}`);
@@ -48,7 +53,12 @@ export const Product = () => {
 								${product.price}
 							</span>
 							<div>
-								<Button variant="magic">Add to card</Button>
+								<Button
+									variant="magic"
+									onClick={() => dispatch(addItemThunk(product.id))}
+								>
+									Add to card
+								</Button>
 							</div>
 						</div>
 					</div>

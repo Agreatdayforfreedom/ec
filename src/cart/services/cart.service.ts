@@ -11,7 +11,11 @@ export class CartService {
 				id,
 			},
 			include: {
-				items: true,
+				items: {
+					include: {
+						product: true,
+					},
+				},
 				_count: { select: { items: true } },
 			},
 		});
@@ -69,26 +73,33 @@ export class CartService {
 		});
 
 		if (!item) return new HttpException('Item not found', 404);
+		if (qty > item.product.stock)
+			return new HttpException(
+				{
+					id: item.id,
+					message: `You can select at most ${item.product.stock} items`,
+				},
+				400,
+			);
 
-		if (item.qty + qty <= 0) {
-			//todo: remove from cart.
+		if (qty <= 0) {
 			return this.removeItem(item.id);
 		}
-		let totalPrice: number = item.totalPrice;
-		if (qty < 0) {
-			totalPrice -= item.product.price * Math.abs(qty);
-		} else if (qty > 0) {
-			totalPrice += item.product.price * qty;
-		} else {
-		}
+		// let totalPrice: number = item.totalPrice;
+		// if (qty < 0) {
+		// 	totalPrice -= item.product.price * Math.abs(qty);
+		// } else if (qty > 0) {
+		// 	totalPrice += item.product.price * qty;
+		// } else {
+		// }
 
 		return this.prisma.cart_Item.update({
 			where: {
 				id: itemId,
 			},
 			data: {
-				qty: item.qty + qty,
-				totalPrice,
+				qty,
+				totalPrice: item.product.price * qty,
 			},
 		});
 	}
