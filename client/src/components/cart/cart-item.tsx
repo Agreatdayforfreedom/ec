@@ -23,7 +23,6 @@ export const CartItem = ({ item }: Props) => {
 	const onDelete = () => {
 		dispatch(deleteItemThunk(item.id));
 	};
-
 	return (
 		<div className="flex">
 			<img className="w-20" src={item.product.image} alt={item.product.title} />

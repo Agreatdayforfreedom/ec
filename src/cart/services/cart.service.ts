@@ -42,6 +42,9 @@ export class CartService {
 
 		if (!item) {
 			return await this.prisma.cart_Item.create({
+				include: {
+					product: true,
+				},
 				data: {
 					cartId,
 					productId,
@@ -52,6 +55,9 @@ export class CartService {
 			item.qty++;
 			item.totalPrice += product.price;
 			return await this.prisma.cart_Item.update({
+				include: {
+					product: true,
+				},
 				where: {
 					id: item.id,
 				},

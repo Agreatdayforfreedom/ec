@@ -8,12 +8,15 @@ import { Stars } from '@/components/review/stars';
 import Loader from '@/components/loader';
 
 import { ReviewsSection } from './reviews-section';
-import { useAppDispatch } from '../hooks/rtk';
+import { useAppDispatch, useAppSelector } from '../hooks/rtk';
 import { addItemThunk } from '../features/cart/cartApi';
+import { useToast } from '../components/ui/use-toast';
 
 export const Product = () => {
 	const params = useParams();
 	const [product, setProduct] = useState<IProduct>();
+
+	const { success } = useAppSelector((state) => state.cart);
 
 	const dispatch = useAppDispatch();
 
@@ -24,6 +27,18 @@ export const Product = () => {
 		}
 		get();
 	}, []);
+
+	const { toast } = useToast();
+
+	useEffect(() => {
+		if (success) {
+			toast({
+				className: 'bg-magic-550 border-magic-500',
+				title: success.message,
+			});
+		}
+	}, [success]);
+
 	if (!product) return <Loader />;
 	return (
 		<div className="pt-5">

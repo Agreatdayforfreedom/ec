@@ -3,6 +3,7 @@ import {
 	addItemThunk,
 	deleteItemThunk,
 	getCartThunk,
+	resetWithDelayThunk,
 	updateQtyThunk,
 } from './cartApi';
 import { Cart_Item } from '@/interfaces';
@@ -12,18 +13,22 @@ type StateError = {
 	message: string;
 };
 
+type StateSuccess = {
+	message: string;
+};
+
 interface InitialState {
 	items: Cart_Item[];
 	loading: boolean;
 	error: StateError | undefined;
-	success: boolean;
+	success: StateSuccess | undefined;
 }
 
 const initialState: InitialState = {
 	items: [],
 	loading: false,
 	error: undefined,
-	success: false,
+	success: undefined,
 };
 
 const cartSlice = createSlice({
@@ -31,31 +36,43 @@ const cartSlice = createSlice({
 	initialState,
 	reducers: {},
 	extraReducers: (builder) => {
-		//todo
-		builder.addCase(getCartThunk.fulfilled, (state, action) => {
-			state.items = action.payload.items;
-		});
+		builder
+			.addCase(getCartThunk.pending, (state, _) => {
+				state.loading = true;
+			})
+			.addCase(getCartThunk.fulfilled, (state, action) => {
+				state.items = action.payload.items;
 
-		//todo
+				state.loading = false;
+				state.error = undefined;
+			});
+
 		builder
 			.addCase(addItemThunk.pending, (state, _) => {
 				state.loading = true;
 			})
 			.addCase(addItemThunk.fulfilled, (state, action) => {
-				action.payload && state.items?.push(action.payload);
+				console.log(action.payload);
+				state.items = state.items.map((mem) => {
+					if (mem.product.id === action.payload.product.id) {
+						return { ...mem, ...action.payload };
+					}
+					return mem;
+				});
 				state.loading = false;
+				state.success = { message: 'Item added' };
 			});
 
 		builder
 			.addCase(updateQtyThunk.pending, (state, _) => {
 				state.loading = true;
 				state.error = undefined;
-				state.success = false;
+				state.success = undefined;
 			})
 			.addCase(updateQtyThunk.rejected, (state, action) => {
 				state.error = action.payload as StateError;
 				state.loading = false;
-				state.success = false;
+				state.success = undefined;
 			})
 			.addCase(updateQtyThunk.fulfilled, (state, action) => {
 				state.items = state.items.map((x) => {
@@ -68,7 +85,7 @@ const cartSlice = createSlice({
 					}
 					return x;
 				});
-				state.success = true;
+				state.success = { message: 'Updated!' };
 				state.loading = false;
 				state.error = undefined;
 			});
@@ -77,13 +94,17 @@ const cartSlice = createSlice({
 			.addCase(deleteItemThunk.pending, (state, _) => {
 				state.error = undefined;
 				state.loading = true;
-				state.success = false;
+				state.success = undefined;
 			})
 			.addCase(deleteItemThunk.rejected, (_, __) => {})
 			.addCase(deleteItemThunk.fulfilled, (state, action) => {
 				state.loading = false;
 				state.items = state.items.filter((x) => x.id !== action.payload.id);
 			});
+
+		builder.addCase(resetWithDelayThunk.fulfilled, (state) => {
+			state.success = undefined;
+		});
 	},
 });
 
