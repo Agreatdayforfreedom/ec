@@ -59,13 +59,14 @@ const cartSlice = createSlice({
 				state.loading = true;
 			})
 			.addCase(addItemThunk.fulfilled, (state, action) => {
-				console.log(action.payload);
-				state.items = state.items.map((mem) => {
-					if (mem.product.id === action.payload.product.id) {
-						return { ...mem, ...action.payload };
-					}
-					return mem;
-				});
+				if (state.items.find((x) => x.product.id === action.payload.product.id))
+					state.items = state.items.map((mem) => {
+						if (mem.product.id === action.payload.product.id) {
+							return { ...mem, ...action.payload };
+						}
+						return mem;
+					});
+				else state.items.push(action.payload);
 				state.loading = false;
 				state.success = { message: 'Item added' };
 			});
