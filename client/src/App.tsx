@@ -12,6 +12,8 @@ import { useAppDispatch } from '@/hooks/rtk';
 import { profileThunk } from '@/features/auth/authApi';
 import { getCartThunk } from '@/features/cart/cartApi';
 import { Cart } from '@/pages/cart';
+import { Orders } from './pages/orders';
+import Order from './pages/order';
 
 function App() {
 	axios.defaults.baseURL = 'http://localhost:4000';
@@ -30,6 +32,8 @@ function App() {
 				<Route index element={<Home />} />
 				<Route path="/product/:id" element={<Product />} />
 				<Route path="/cart" element={<Cart />} />
+				<Route path="/orders" element={<Orders />} />
+				<Route path="/order/:id" element={<Order />} />
 			</Route>
 		</Routes>
 	);

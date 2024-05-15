@@ -35,10 +35,30 @@ export interface Review {
 	updated_at: Date;
 }
 
+export interface Order {
+	id: string;
+	totalItems: number;
+	subtotal: number;
+	orderStatus: OrderStatus;
+	order_items?: Order_Item[];
+}
+
+export enum OrderStatus {
+	PENDING = 'PENDING',
+	PURCHASED = 'PURCHASED',
+}
+
 export enum ORDER_BY {
 	ASC = 'asc',
 	DESC = 'desc',
 }
+
+export type Order_Item = {
+	id: string;
+	qty: number;
+	totalPrice: number;
+	product: Product;
+};
 
 export type Cart_Item = {
 	id: string;
