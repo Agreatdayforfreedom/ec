@@ -1,4 +1,4 @@
-@token = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNsdnY4MnU1ODAwMDA5aXV4cmh6MGNiNWYiLCJlbWFpbCI6InRlc3RAdGV4dC5jb20iLCJ1c2VybmFtZSI6InRlc3QiLCJjYXJ0IjoiY2x2djgydTU4MDAwMTlpdXhwbjg4aTIzayIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTcxNTcwODUyNywiZXhwIjoxNzE1Nzk0OTI3fQ.-4Ni7yBwMxtA10MYur7MEuTFSDD4zQdiDyva5tsfwm8
+@token = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNsdnY4MnU1ODAwMDA5aXV4cmh6MGNiNWYiLCJlbWFpbCI6InRlc3RAdGV4dC5jb20iLCJ1c2VybmFtZSI6InRlc3QiLCJjYXJ0IjoiY2x2djgydTU4MDAwMTlpdXhwbjg4aTIzayIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTcxNTc5ODM3OCwiZXhwIjoxNzE1ODg0Nzc4fQ.UxTcjHhnrH3p83LLmFtkul8nAD4DsAd2UvUn2Pql0y0
 @port = 4000
 //PRODUCT
 
@@ -124,3 +124,18 @@ Authorization: {{token}}
 ### 
 DELETE http://localhost:{{port}}/reviews/del/clvpp9dat0001n12t4cwml86s
 Authorization: {{token}}
+
+
+### ORDER
+
+GET http://localhost:{{port}}/order
+Authorization: {{token}}
+
+###
+GET http://localhost:{{port}}/order/clw86nhg30001k9hfk40qlcac
+Authorization: {{token}}
+
+###
+POST http://localhost:{{port}}/order/create
+Authorization: {{token}}
+
