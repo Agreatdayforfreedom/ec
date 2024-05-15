@@ -1,11 +1,19 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import axios, { AxiosRequestConfig } from 'axios';
+import { useNavigate } from 'react-router-dom';
 
-import { useAppSelector } from '@/hooks/rtk';
+import { useAppDispatch, useAppSelector } from '@/hooks/rtk';
 import { Button } from '@/components/ui/button';
 import { CartItem } from '@/components/cart/cart-item';
 import { useToast } from '@/components/ui/use-toast';
+import { resetState } from '@/features/cart/cartSlice';
 
 export const Cart = () => {
+	const [loading, setLoading] = useState(false);
+
+	const navigate = useNavigate();
+	const dispatch = useAppDispatch();
+
 	const cart = useAppSelector((state) => state.cart);
 	let totalPrice = cart.items?.reduce((ac, c) => {
 		return ac + c.totalPrice;
@@ -17,6 +25,25 @@ export const Cart = () => {
 
 	const { toast } = useToast();
 
+	const createOrder = async () => {
+		setLoading(true);
+
+		const token = localStorage.getItem('access_token');
+		const config: AxiosRequestConfig = {
+			headers: {
+				Authorization: `Bearer ${token}`,
+			},
+		};
+
+		const { data } = await axios.post('/order/create', {}, config);
+		if (data) {
+			navigate(`/order/${data.id}`);
+			dispatch(resetState());
+		}
+
+		setLoading(true);
+	};
+
 	useEffect(() => {
 		if (cart.success) {
 			toast({
@@ -25,6 +52,7 @@ export const Cart = () => {
 			});
 		}
 	}, [cart.success]);
+
 	return (
 		<div className="space-y-2 w-[95%] mx-auto mt-5 md:flex">
 			<div className="space-y-2 overflow-y-scroll md:overflow-auto h-96 md:h-full md:w-[70%]">
@@ -40,7 +68,12 @@ export const Cart = () => {
 						<span>Subtotal ({totalItems})</span>
 						<span className="font-bold">${totalPrice}</span>
 					</div>
-					<Button size="sm" className="" variant="magic">
+					<Button
+						disabled={loading}
+						size="sm"
+						onClick={createOrder}
+						variant="magic"
+					>
 						Buy
 					</Button>
 				</div>
