@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import axios, { AxiosRequestConfig } from 'axios';
 
 import { Order as IOrder, OrderStatus } from '@/interfaces';
@@ -82,7 +82,9 @@ const Order = () => {
 						<div className="font-semibold flex-1">{order.subtotal}</div>
 					</div>
 					<div className="mt-5 flex justify-end">
-						<Button variant={'magic'}>Continue</Button>
+						<Button variant={'magic'} asChild>
+							<Link to={`/order/${order.id}/payment`}>Continue</Link>
+						</Button>
 					</div>
 				</div>
 			</div>

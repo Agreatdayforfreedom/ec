@@ -16,6 +16,15 @@ export const Nav = () => {
 			{isAuth && user ? (
 				<>
 					<Link
+						to={'/orders'}
+						className="font-semibold hover:text-magic-100/75 transition-colors"
+					>
+						Orders
+					</Link>
+					<div className="h-8 w-px">
+						<Separator orientation="vertical" className="bg-magic-600" />
+					</div>
+					<Link
 						to="/cart"
 						className="flex space-x-1 items-end mr-2 hover:bg-magic-500/50 p-1.5 rounded-full"
 					>

@@ -14,6 +14,7 @@ import { getCartThunk } from '@/features/cart/cartApi';
 import { Cart } from '@/pages/cart';
 import { Orders } from './pages/orders';
 import Order from './pages/order';
+import { Payment } from './pages/payment';
 
 function App() {
 	axios.defaults.baseURL = 'http://localhost:4000';
@@ -34,6 +35,7 @@ function App() {
 				<Route path="/cart" element={<Cart />} />
 				<Route path="/orders" element={<Orders />} />
 				<Route path="/order/:id" element={<Order />} />
+				<Route path="/order/:id/payment" element={<Payment />} />
 			</Route>
 		</Routes>
 	);
