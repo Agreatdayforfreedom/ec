@@ -14,7 +14,7 @@ export interface Obj {
 }
 interface Props extends Obj {}
 interface Options {
-	navigate: boolean;
+	navigate: string;
 }
 
 const useQueryParams = ({ ...props }: Props = {}): [
@@ -34,7 +34,9 @@ const useQueryParams = ({ ...props }: Props = {}): [
 				searchParams.set(key, value);
 				setSearchParams(searchParams);
 				if (opt && opt.navigate) {
-					navigate(`books${startsQPChar.concat(searchParams.toString())}`);
+					navigate(
+						`${opt.navigate}${startsQPChar.concat(searchParams.toString())}`,
+					);
 				}
 			}
 		}

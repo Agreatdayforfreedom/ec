@@ -11,11 +11,10 @@ import { OrderBy } from '@/components/order-by';
 
 export const Home = () => {
 	const dispatch = useAppDispatch();
-	const { loading, products, count } = useAppSelector((state) => state.product);
+	const { loading, products } = useAppSelector((state) => state.product);
 	const [params] = useQueryParams();
 
 	useEffect(() => {
-		console.log(params);
 		dispatch(getProducts(params));
 	}, [params]);
 

@@ -27,6 +27,11 @@ export const Orders = () => {
 	return (
 		<div className="w-[95%] mx-auto mt-5">
 			<h1 className="text-xl my-4">Orders</h1>
+			{orders.length === 0 && (
+				<div className="w-full flex justify-center text-2xl font-semibold">
+					There is nothing to show here.
+				</div>
+			)}
 			{orders.map((order) => (
 				<div
 					key={order.id}

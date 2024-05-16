@@ -16,6 +16,7 @@ export const Product = () => {
 	const params = useParams();
 	const [product, setProduct] = useState<IProduct>();
 
+	const { isAuth } = useAppSelector((state) => state.auth);
 	const { success } = useAppSelector((state) => state.cart);
 
 	const dispatch = useAppDispatch();
@@ -68,12 +69,14 @@ export const Product = () => {
 								${product.price}
 							</span>
 							<div>
-								<Button
-									variant="magic"
-									onClick={() => dispatch(addItemThunk(product.id))}
-								>
-									Add to card
-								</Button>
+								{isAuth && (
+									<Button
+										variant="magic"
+										onClick={() => dispatch(addItemThunk(product.id))}
+									>
+										Add to card
+									</Button>
+								)}
 							</div>
 						</div>
 					</div>

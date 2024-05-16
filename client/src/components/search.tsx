@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button';
 import { SearchIcon } from 'lucide-react';
 import { ElementRef, useRef } from 'react';
 import useQueryParams from '../hooks/use-query-params';
+import { useNavigate } from 'react-router-dom';
 
 export const Search = () => {
 	const inputRef = useRef<ElementRef<'input'>>(null);
@@ -10,8 +11,9 @@ export const Search = () => {
 	const [_, setParams] = useQueryParams();
 
 	const onSearch = () => {
-		if (inputRef?.current?.value && inputRef.current.value.trim() !== '')
-			setParams({ search: inputRef.current.value.trim() });
+		if (inputRef?.current?.value && inputRef.current.value.trim() !== '') {
+			setParams({ search: inputRef.current.value.trim() }, { navigate: '/' });
+		}
 	};
 
 	return (
