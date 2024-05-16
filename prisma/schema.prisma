@@ -25,7 +25,9 @@ model User {
   email    String
   password String
 
-	role Role @default(USER)
+	gems 		 Int 		@default(1000)	
+
+	role 	   Role 			@default(USER)
 
 	cart 		 Cart 	@relation(fields: [cartId], references: [id])
 	cartId   String @unique 
@@ -46,7 +48,7 @@ model Product {
   image       String
   price       Int   
   stock       Int 	 @default(1)
-
+	gems_price  Int	
   metadata    Metadata?
 
 	cart_item   Cart_Item?

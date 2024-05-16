@@ -1,4 +1,4 @@
-@token = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNsdnY4MnU1ODAwMDA5aXV4cmh6MGNiNWYiLCJlbWFpbCI6InRlc3RAdGV4dC5jb20iLCJ1c2VybmFtZSI6InRlc3QiLCJjYXJ0IjoiY2x2djgydTU4MDAwMTlpdXhwbjg4aTIzayIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTcxNTc5ODM3OCwiZXhwIjoxNzE1ODg0Nzc4fQ.UxTcjHhnrH3p83LLmFtkul8nAD4DsAd2UvUn2Pql0y0
+@token = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNsdzlyd2p6MzAwMDB2amJqZ2wxdGt5M3kiLCJlbWFpbCI6InNvbWFAZ21haWwuY29tIiwidXNlcm5hbWUiOiJTb21hIiwiY2FydCI6ImNsdzlyd2p6MzAwMDF2amJqZG5lc3ExOXAiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3MTU4OTY0MTcsImV4cCI6MTcxNTk4MjgxN30.3jw2WMwvzFYCQG-5z69y9Fk2SOIrfobrNATWYB4GEbU
 @port = 4000
 //PRODUCT
 
@@ -35,8 +35,8 @@ POST http://localhost:{{port}}/auth/signup HTTP/1.1
 content-type: application/json
 
 {
-    "username": "test",
-    "email": "test@text.com",
+    "username": "soma",
+    "email": "soma@gmail.com",
     "password": "123123"
 }
 
@@ -46,7 +46,7 @@ POST http://localhost:{{port}}/auth/signin HTTP/1.1
 content-type: application/json
 
 {
-    "email": "test@text.com",
+    "email": "soma@gmail.com",
     "password": "123123"
 }
 
@@ -139,3 +139,7 @@ Authorization: {{token}}
 POST http://localhost:{{port}}/order/create
 Authorization: {{token}}
 
+### stripe
+
+GET http://localhost:{{port}}/stripe/customers
+Authorization: {{token}}

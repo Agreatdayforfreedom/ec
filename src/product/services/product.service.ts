@@ -58,7 +58,7 @@ export class ProductService {
 
 	async create(payload: CreateProductDTO) {
 		return await this.prisma.product.create({
-			data: payload,
+			data: { ...payload, gems_price: payload.price * 100 },
 		});
 	}
 

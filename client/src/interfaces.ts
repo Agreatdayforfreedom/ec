@@ -6,6 +6,7 @@ export interface Product extends Partial<ProductExtraKeys> {
 	author: string;
 	price: number;
 	stock: number;
+	gems_price: number;
 	reviews: Review[];
 }
 
@@ -24,6 +25,7 @@ export interface User {
 	username: string;
 	email: string;
 	role: ROLE;
+	gems: number;
 }
 
 export interface Review {

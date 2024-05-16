@@ -68,6 +68,7 @@ export const Product = () => {
 							<span className="font-semibold text-green-600">
 								${product.price}
 							</span>
+							<span>{product.gems_price}</span>
 							<div>
 								{isAuth && (
 									<Button

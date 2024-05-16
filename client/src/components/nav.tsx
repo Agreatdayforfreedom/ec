@@ -36,6 +36,7 @@ export const Nav = () => {
 					<div className="text-sm text-magic-100 font-semibold">
 						Welcome <span>{user.username}</span>
 					</div>
+					<div>{user.gems}</div>
 					<div className="h-8 w-px">
 						<Separator orientation="vertical" className="bg-magic-600" />
 					</div>
