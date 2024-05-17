@@ -11,14 +11,14 @@ import { ReviewsSection } from './reviews-section';
 import { useAppDispatch, useAppSelector } from '../hooks/rtk';
 import { addItemThunk } from '../features/cart/cartApi';
 import { useToast } from '../components/ui/use-toast';
+import { Gem } from 'lucide-react';
 
 export const Product = () => {
 	const params = useParams();
 	const [product, setProduct] = useState<IProduct>();
 
-	const { isAuth } = useAppSelector((state) => state.auth);
+	const { isAuth, user } = useAppSelector((state) => state.auth);
 	const { success } = useAppSelector((state) => state.cart);
-
 	const dispatch = useAppDispatch();
 
 	useEffect(() => {
@@ -65,10 +65,17 @@ export const Product = () => {
 							<p className="mx-2 mt-5 text-magic-50">{product.description}</p>
 						</div>
 						<div className="flex items-center justify-between">
-							<span className="font-semibold text-green-600">
-								${product.price}
-							</span>
-							<span>{product.gems_price}</span>
+							<div className="flex flex-col">
+								<span className="font-semibold text-green-600">
+									${product.price}
+								</span>
+								<div className="flex items-end space-x-1">
+									<Gem size={18} className="stroke-sky-500" />
+									<span className="mt-1 font-semibold">
+										{product.gems_price}
+									</span>
+								</div>
+							</div>
 							<div>
 								{isAuth && (
 									<Button

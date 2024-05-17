@@ -6,6 +6,7 @@ import { Order as IOrder } from '@/interfaces';
 import Loader from '@/components/loader';
 import { Button } from '../components/ui/button';
 import { Coins, CreditCard } from 'lucide-react';
+import { useAppSelector } from '../hooks/rtk';
 
 enum PaymentMethod {
 	CREDITCARD = 'credit-card',
@@ -15,10 +16,11 @@ enum PaymentMethod {
 export const Payment = () => {
 	const [order, setOrder] = useState<IOrder>();
 	const [loading, setLoading] = useState<boolean>(true);
-
 	const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>(
 		PaymentMethod.CREDITS,
 	);
+
+	const auth = useAppSelector((state) => state.auth);
 
 	const params = useParams();
 
@@ -65,7 +67,14 @@ export const Payment = () => {
 							id="credits"
 						/>
 						<label className="font-semibold" htmlFor="credits">
-							Credits
+							Credits{' '}
+							{auth.user?.gems && auth.user?.gems >= order.subtotal_gems ? (
+								<span className="text-sm text-green-500">(Enough gems!)</span>
+							) : (
+								<span className="text-sm text-red-500">
+									(You need {order.subtotal_gems - auth.user?.gems!} more!)
+								</span>
+							)}
 						</label>
 					</div>
 

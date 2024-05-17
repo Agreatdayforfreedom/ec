@@ -79,7 +79,11 @@ const Order = () => {
 						>
 							{order.orderStatus}
 						</div>
-						<div className="font-semibold flex-1">{order.subtotal}</div>
+						<div className="font-semibold flex-1 space-x-1">
+							<span>{order.subtotal}</span>
+							<span>/</span>
+							<span className="text-sky-600">{order.subtotal_gems}</span>
+						</div>
 					</div>
 					<div className="mt-5 flex justify-end">
 						<Button variant={'magic'} asChild>

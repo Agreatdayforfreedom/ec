@@ -49,11 +49,13 @@ export class CartService {
 					cartId,
 					productId,
 					totalPrice: product.price,
+					totalGems: product.gems_price,
 				},
 			});
 		} else {
 			item.qty++;
 			item.totalPrice += product.price;
+			item.totalGems += product.gems_price;
 			return await this.prisma.cart_Item.update({
 				include: {
 					product: true,

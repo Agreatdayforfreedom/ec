@@ -19,6 +19,10 @@ export const Cart = () => {
 		return ac + c.totalPrice;
 	}, 0);
 
+	let totalGems = cart.items?.reduce((ac, c) => {
+		return ac + c.totalGems;
+	}, 0);
+
 	let totalItems = cart.items?.reduce((ac, c) => {
 		return ac + c.qty;
 	}, 0);
@@ -66,7 +70,10 @@ export const Cart = () => {
 				<div className="p-2 flex flex-col items-end">
 					<div className="space-x-2 w-full">
 						<span>Subtotal ({totalItems})</span>
-						<span className="font-bold">${totalPrice}</span>
+						<div className="flex flex-col">
+							<span className="font-bold">${totalPrice}</span>
+							<span className="font-bold">{totalGems} Gems</span>
+						</div>
 					</div>
 					<Button
 						disabled={loading}

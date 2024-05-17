@@ -10,7 +10,6 @@ export const Nav = () => {
 	const { isAuth, user } = useAppSelector((state) => state.auth);
 	const { items } = useAppSelector((state) => state.cart);
 	const dispatch = useAppDispatch();
-
 	return (
 		<div className="h-full flex items-center space-x-2">
 			{isAuth && user ? (
@@ -33,10 +32,15 @@ export const Nav = () => {
 							{items?.length}
 						</span>
 					</Link>
-					<div className="text-sm text-magic-100 font-semibold">
-						Welcome <span>{user.username}</span>
+					<div className="flex space-x-2 text-sm  ">
+						<div>
+							Welcome{' '}
+							<span className="text-magic-100 font-semibold">
+								{user.username}
+							</span>
+						</div>
+						<span className="font-bold text-sky-600">{user.gems}</span>
 					</div>
-					<div>{user.gems}</div>
 					<div className="h-8 w-px">
 						<Separator orientation="vertical" className="bg-magic-600" />
 					</div>

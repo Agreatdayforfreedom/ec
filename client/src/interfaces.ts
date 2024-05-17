@@ -41,6 +41,7 @@ export interface Order {
 	id: string;
 	totalItems: number;
 	subtotal: number;
+	subtotal_gems: number;
 	orderStatus: OrderStatus;
 	order_items?: Order_Item[];
 }
@@ -59,6 +60,7 @@ export type Order_Item = {
 	id: string;
 	qty: number;
 	totalPrice: number;
+	totalGems: number;
 	product: Product;
 };
 
@@ -66,6 +68,7 @@ export type Cart_Item = {
 	id: string;
 	qty: number;
 	totalPrice: number;
+	totalGems: number;
 	product: Product;
 };
 

@@ -34,6 +34,7 @@ export const CartItem = ({ item }: Props) => {
 					{item.product.title}
 				</Link>
 				<span>Total ${item.totalPrice}</span>
+				<span>Gems {item.totalGems}</span>
 				<div className="flex items-center space-x-2">
 					<div className="flex space-x-1">
 						<Input

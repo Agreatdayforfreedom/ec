@@ -2,6 +2,7 @@ import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { CreateUserDTO } from '../../user/dto/user.dto';
 import { UserService } from '../../user/services/user.service';
 import { JwtService } from '@nestjs/jwt';
+import { User } from '@prisma/client';
 
 @Injectable()
 export class AuthService {
@@ -21,6 +22,7 @@ export class AuthService {
 			email: user.email,
 			username: user.username,
 			cart: user.cartId,
+			gems: user.gems,
 			role: user.role,
 		};
 
@@ -31,10 +33,19 @@ export class AuthService {
 	}
 
 	async signup(payload: CreateUserDTO) {
-		let user = await this.userService.create(payload);
+		let user = (await this.userService.create(payload)) as User;
+
+		const payloadUser = {
+			id: user.id,
+			email: user.email,
+			username: user.username,
+			cart: user.cartId,
+			gems: user.gems,
+			role: user.role,
+		};
 
 		return {
-			user,
+			user: payloadUser,
 			access_token: await this.jwtService.signAsync(user),
 		};
 	}

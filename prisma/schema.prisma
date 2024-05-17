@@ -64,6 +64,7 @@ model Cart_Item {
 	id   	     String  @id @default(cuid())
 	qty        Int     @default(1)
 	totalPrice Int
+	totalGems  Int
 
 	product    Product @relation(fields: [productId], references: [id])
 	productId  String  @unique
@@ -95,16 +96,17 @@ enum OrderStatus {
 }
 
 model Order {
-	id 				  String 			@id @default(cuid())
-	subtotal    Int
-	totalItems  Int
+	id 				    String 			@id @default(cuid())
+	subtotal      Int
+	subtotal_gems Int
+	totalItems    Int
 
-	orderStatus OrderStatus @default(PENDING)
+	orderStatus   OrderStatus @default(PENDING)
 
-	user 				User 				@relation(fields: [userId], references: [id])
-	userId 			String 			
+	user 				  User 				@relation(fields: [userId], references: [id])
+	userId 			  String 			
 
-	order_items 			Order_Item[]
+	order_items		Order_Item[]
 
 	@@map("order")
 }
@@ -113,6 +115,7 @@ model Order_Item {
 	id   	     String  @id @default(cuid())
 	qty        Int     
 	totalPrice Int
+	totalGems  Int
 
 	product    Product @relation(fields: [productId], references: [id])
 	productId  String  

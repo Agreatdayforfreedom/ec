@@ -50,16 +50,18 @@ export class OrderService {
 						productId: i.productId,
 						qty: i.qty,
 						totalPrice: i.totalPrice,
+						totalGems: i.totalGems,
 					},
 			);
 
-			let [subtotal, totalItems] = items.reduce(
+			let [subtotal, totalItems, subtotal_gems] = items.reduce(
 				(acc, c) => {
 					acc[0] += c.totalPrice;
 					acc[1] += c.qty;
+					acc[2] += c.totalGems;
 					return acc;
 				},
-				[0, 0],
+				[0, 0, 0],
 			);
 
 			let purgeCart = this.prisma.cart_Item.deleteMany({
@@ -73,6 +75,7 @@ export class OrderService {
 					subtotal,
 					totalItems,
 					userId,
+					subtotal_gems,
 					order_items: {
 						create: [...items],
 					},
@@ -82,6 +85,7 @@ export class OrderService {
 			const [order_res, _] = await this.prisma.$transaction([order, purgeCart]);
 			return order_res;
 		} catch (error) {
+			console.log(error);
 			return new HttpException('Internal Server Error', 500);
 		}
 	}
