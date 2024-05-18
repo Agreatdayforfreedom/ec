@@ -8,9 +8,10 @@ import { MetadataModule } from './metadata/metadata.module';
 import { CartModule } from './cart/cart.module';
 import { ReviewsModule } from './reviews/reviews.module';
 import { OrderModule } from './order/order.module';
+import { CheckoutModule } from './checkout/checkout.module';
 
 @Module({
-  imports: [ProductModule, UserModule, AuthModule, MetadataModule, CartModule, ReviewsModule, OrderModule],
+  imports: [ProductModule, UserModule, AuthModule, MetadataModule, CartModule, ReviewsModule, OrderModule, CheckoutModule],
   controllers: [AppController],
   providers: [AppService],
 })

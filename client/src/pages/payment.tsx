@@ -43,8 +43,19 @@ export const Payment = () => {
 		setPaymentMethod(e.target.value as PaymentMethod);
 	};
 
-	const onClick = () => {
-		console.log(paymentMethod);
+	const onClick = async () => {
+		const token = localStorage.getItem('access_token');
+		const config: AxiosRequestConfig = {
+			headers: {
+				Authorization: `Bearer ${token}`,
+			},
+		};
+		if (order)
+			if (paymentMethod === PaymentMethod.CREDITS) {
+				await axios.post(`/checkout/gems/${order.id}`, {}, config);
+			} else {
+				console.log('IMPLEMENT THIS FUNCTIONALITY');
+			}
 	};
 
 	if (loading || !order) return <Loader />;
