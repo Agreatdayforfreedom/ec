@@ -16,12 +16,12 @@ export class CartController {
 
 	@Get()
 	getCart(@Request() req) {
-		return this.cartService.getCart(req.user.cart);
+		return this.cartService.getCart(req.user.cartId);
 	}
 
 	@Post('/add/:productId')
 	addToCart(@Param('productId') productId: string, @Request() req) {
-		return this.cartService.addToCart(productId, req.user.cart);
+		return this.cartService.addToCart(productId, req.user.cartId);
 	}
 
 	@Patch('/qty/:itemId')

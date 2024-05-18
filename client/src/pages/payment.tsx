@@ -52,6 +52,7 @@ export const Payment = () => {
 		};
 		if (order)
 			if (paymentMethod === PaymentMethod.CREDITS) {
+				// console.log('here');
 				await axios.post(`/checkout/gems/${order.id}`, {}, config);
 			} else {
 				console.log('IMPLEMENT THIS FUNCTIONALITY');

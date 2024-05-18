@@ -25,13 +25,12 @@ export class CheckoutService {
 				},
 			});
 
-			if (!user) return new HttpException('Unauthenticated', 401);
+			if (!user) throw new HttpException('Unauthenticated', 401);
 			if (user.gems < order.subtotal_gems)
-				return new HttpException('Insufficient gems', 401);
+				throw new HttpException('Insufficient gems', 401);
 			if (order.orderStatus === OrderStatus.PURCHASED)
-				return new HttpException('This order has already been completed', 404);
-			if (order.userId !== user.id)
-				return new HttpException('Unautorized', 401);
+				throw new HttpException('This order has already been completed', 404);
+			if (order.userId !== user.id) throw new HttpException('Unautorized', 401);
 
 			this.prisma.$transaction(async (self) => {
 				await this.prisma.order.update({
@@ -68,6 +67,8 @@ export class CheckoutService {
 					});
 				}
 			});
-		} catch (error) {}
+		} catch (error) {
+			throw error;
+		}
 	}
 }
