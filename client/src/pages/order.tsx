@@ -43,7 +43,10 @@ const Order = () => {
 					<div className="flex-1 px-2 font-bold ">Price</div>
 				</div>
 				{order.order_items?.map((item) => (
-					<div className="flex border-y border-x border-x-magic-200/50 border-magic-200 ">
+					<div
+						key={item.id}
+						className="flex border-y border-x border-x-magic-200/50 border-magic-200 "
+					>
 						<img
 							src={item.product.image}
 							alt={item.product.title}

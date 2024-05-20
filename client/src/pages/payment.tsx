@@ -1,8 +1,8 @@
-import { ChangeEvent, ElementRef, useEffect, useRef, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { ChangeEvent, useEffect, useState } from 'react';
+import { Navigate, useParams } from 'react-router-dom';
 import axios, { AxiosRequestConfig } from 'axios';
 
-import { Order as IOrder } from '@/interfaces';
+import { Order as IOrder, OrderStatus } from '@/interfaces';
 import Loader from '@/components/loader';
 import { Button } from '../components/ui/button';
 import { Coins, CreditCard } from 'lucide-react';
@@ -52,15 +52,14 @@ export const Payment = () => {
 		};
 		if (order)
 			if (paymentMethod === PaymentMethod.CREDITS) {
-				// console.log('here');
 				await axios.post(`/checkout/gems/${order.id}`, {}, config);
 			} else {
 				console.log('IMPLEMENT THIS FUNCTIONALITY');
 			}
 	};
-
 	if (loading || !order) return <Loader />;
-
+	if (order.orderStatus === OrderStatus.PURCHASED)
+		return <Navigate to={`/order/${order.id}`} />;
 	return (
 		<div className="h-full flex items-center justify-center">
 			<div className="border border-magic-500 w-96 h-80 rounded flex flex-col justify-between">
