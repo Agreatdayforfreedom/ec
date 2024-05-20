@@ -17,7 +17,7 @@ export const Product = () => {
 	const params = useParams();
 	const [product, setProduct] = useState<IProduct>();
 
-	const { isAuth, user } = useAppSelector((state) => state.auth);
+	const { isAuth } = useAppSelector((state) => state.auth);
 	const { success } = useAppSelector((state) => state.cart);
 	const dispatch = useAppDispatch();
 
@@ -39,7 +39,6 @@ export const Product = () => {
 			});
 		}
 	}, [success]);
-
 	if (!product) return <Loader />;
 	return (
 		<div className="pt-5">
@@ -57,10 +56,10 @@ export const Product = () => {
 							<h2 className="text-2xl font-semibold">{product.title}</h2>
 							<div className="mt-2 ml-2 flex items-end space-x-1">
 								<span className="text-magic-300 mr-1">
-									{product.averageRate}
+									{product.rating.avg.toFixed(2)}
 								</span>
-								<Stars _static size={20} stars={product.averageRate} />
-								<span className="">({product.totalReviews})</span>
+								<Stars _static size={20} stars={product.rating.avg} />
+								<span className="">({product.rating._count?.reviews})</span>
 							</div>
 							<p className="mx-2 mt-5 text-magic-50">{product.description}</p>
 						</div>
@@ -90,7 +89,7 @@ export const Product = () => {
 					</div>
 				</section>
 			</div>
-			<ReviewsSection productId={product.id} />
+			<ReviewsSection ratingId={product.ratingId} />
 		</div>
 	);
 };

@@ -1,4 +1,4 @@
-export interface Product extends Partial<ProductExtraKeys> {
+export interface Product {
 	id: string;
 	image: string;
 	title: string;
@@ -7,12 +7,8 @@ export interface Product extends Partial<ProductExtraKeys> {
 	price: number;
 	stock: number;
 	gems_price: number;
-	reviews: Review[];
-}
-
-interface ProductExtraKeys {
-	totalReviews: number;
-	averageRate: number;
+	rating: Rating;
+	ratingId: string;
 }
 
 export enum ROLE {
@@ -26,6 +22,13 @@ export interface User {
 	email: string;
 	role: ROLE;
 	gems: number;
+}
+
+export interface Rating {
+	id: string;
+	avg: number;
+	reviews: Review[];
+	_count?: { reviews?: number };
 }
 
 export interface Review {

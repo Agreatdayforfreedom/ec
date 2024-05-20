@@ -6,37 +6,32 @@ import { Query } from '../../types';
 
 export interface ProductExtraKeys {
 	totalReviews: number;
-	averageRate: number;
 }
 
 @Injectable()
 export class ProductService {
 	constructor(private readonly prisma: PrismaService) {}
 
-	async get({ id }: { id: string }): Promise<Product & ProductExtraKeys> {
+	async get({ id }: { id: string }): Promise<Product> {
 		const product = await this.prisma.product.findUnique({
 			where: {
 				id,
 			},
 			include: {
 				metadata: true,
+				rating: {
+					include: {
+						_count: {
+							select: {
+								reviews: true,
+							},
+						},
+					},
+				},
 			},
-		});
-		let reviewsRate = await this.prisma.reviews.aggregate({
-			where: {
-				productId: product.id,
-			},
-			_sum: {
-				stars: true,
-			},
-			_count: true,
 		});
 		if (!product) throw new HttpException('Product not found', 404);
-		return {
-			...product,
-			totalReviews: reviewsRate._count,
-			averageRate: reviewsRate._sum.stars / reviewsRate._count,
-		};
+		return product;
 	}
 
 	async getAll(query: Query) {
@@ -58,7 +53,13 @@ export class ProductService {
 
 	async create(payload: CreateProductDTO) {
 		return await this.prisma.product.create({
-			data: { ...payload, gems_price: payload.price * 100 },
+			data: {
+				...payload,
+				gems_price: payload.price * 100,
+				rating: {
+					create: { avg: 0 },
+				},
+			},
 		});
 	}
 

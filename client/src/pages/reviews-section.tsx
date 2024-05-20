@@ -9,10 +9,10 @@ import useQueryParams from '@/hooks/use-query-params';
 import { Reviews } from '@/components/review/reviews';
 
 interface Props {
-	productId: string;
+	ratingId: string;
 }
 
-export const ReviewsSection = ({ productId }: Props) => {
+export const ReviewsSection = ({ ratingId }: Props) => {
 	const [reviews, setReviews] = useState<IReview[]>();
 	const [count, setCount] = useState<number>(0);
 	const [loading, setLoading] = useState<boolean>(false);
@@ -21,7 +21,7 @@ export const ReviewsSection = ({ productId }: Props) => {
 		setLoading(true);
 		let qp = query && query;
 		async function getAll() {
-			const reviews = await axios(`/reviews/${productId}${qp}`);
+			const reviews = await axios(`/reviews/${ratingId}${qp}`);
 			setReviews(reviews.data.reviews);
 			setCount(reviews.data.count);
 			setLoading(false);
@@ -37,13 +37,13 @@ export const ReviewsSection = ({ productId }: Props) => {
 		setLoading(true);
 
 		const reviews = await axios(
-			`/reviews/${productId}?stars=${stars}&order_by=${order_by}&take=${take}`,
+			`/reviews/${ratingId}?stars=${stars}&order_by=${order_by}&take=${take}`,
 		);
 		setReviews(reviews.data.reviews);
 		setCount(reviews.data.count);
 		setLoading(false);
 	};
-
+	console.log(count);
 	return (
 		<div className="p-3 justify-between space-y-3">
 			<h2 className="text-2xl">Reviews ({count})</h2>

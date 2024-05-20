@@ -20,21 +20,21 @@ export class ReviewsController {
 	constructor(private reviewsService: ReviewsService) {}
 
 	@Public()
-	@Get('/:productId')
+	@Get('/:ratingId')
 	getReviews(
-		@Param('productId') productId: string,
+		@Param('ratingId') ratingId: string,
 		@Query(QueryPipeTransform) query: IQuery,
 	) {
-		return this.reviewsService.getReviews(productId, query);
+		return this.reviewsService.getReviews(ratingId, query);
 	}
 
-	@Post('/send/:productId')
+	@Post('/send/:ratingId')
 	create(
-		@Param('productId') productId: string,
+		@Param('ratingId') ratingId: string,
 		@Body() payload: CreateReviewDTO,
 		@Request() req,
 	) {
-		return this.reviewsService.create(payload, req.user.id, productId);
+		return this.reviewsService.create(payload, req.user.id, ratingId);
 	}
 
 	@Patch('/update/:reviewId')

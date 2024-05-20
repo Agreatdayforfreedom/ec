@@ -7,11 +7,13 @@ import { Query } from '../../types';
 export class ReviewsService {
 	constructor(private prisma: PrismaService) {}
 
-	async getReviews(productId: string, query: Query) {
+	async getReviews(ratingId: string, query: Query) {
 		const [reviews, count] = await this.prisma.$transaction([
 			this.prisma.reviews.findMany({
 				where: {
-					productId,
+					rating: {
+						id: ratingId,
+					},
 					...(query.stars ? { stars: query.stars } : {}),
 				},
 				include: {
@@ -31,7 +33,7 @@ export class ReviewsService {
 			this.prisma.reviews.count({
 				where: {
 					...(query.stars ? { stars: query.stars } : {}),
-					productId,
+					ratingId,
 				},
 			}),
 		]);
@@ -42,28 +44,64 @@ export class ReviewsService {
 		};
 	}
 
-	async create(payload: CreateReviewDTO, userId: string, productId: string) {
+	async create(payload: CreateReviewDTO, userId: string, ratingId: string) {
 		if (payload.stars && (payload.stars < 0 || payload.stars > 5))
 			return new HttpException('Wrong stars range', 400);
+
+		const rating = await this.prisma.rating.findUnique({
+			where: {
+				id: ratingId,
+			},
+		});
+
+		if (!rating) return new HttpException('Rating not found', 404);
 
 		const reviewed = await this.prisma.reviews.findFirst({
 			where: {
 				userId,
-				productId,
+				ratingId,
 			},
 		});
 
-		if (reviewed)
-			return new HttpException('You have already rated this book', 400);
+		const avg = await this.prisma.reviews.findMany({
+			where: {
+				ratingId,
+			},
+			select: {
+				stars: true,
+			},
+		});
+		console.log(avg);
+		// if (reviewed)
+		// 	return new HttpException('You have already rated this book', 400);
+
 		try {
-			return await this.prisma.reviews.create({
+			let update = this.prisma.rating.update({
+				where: {
+					id: ratingId,
+				},
+				data: {
+					avg:
+						avg.length > 0
+							? (avg.reduce((acc, { stars }) => acc + stars, 0) +
+									payload.stars) /
+								(avg.length + 1)
+							: payload.stars,
+				},
+			});
+			let insert = this.prisma.reviews.create({
 				data: {
 					...payload,
 					userId,
-					productId,
+					ratingId,
 				},
 			});
+
+			let [review, _] = await this.prisma.$transaction([insert, update]);
+
+			return review;
 		} catch (error) {
+			console.log(error);
 			return new HttpException('Internal Server Error', 500);
 		}
 	}
