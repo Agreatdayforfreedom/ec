@@ -82,17 +82,25 @@ export class ProductService {
 						},
 					},
 				],
-				//TODO:
-				// reviews: {
-				// some: {
-				// 	stars: {
-				// 	},
-				// },
-				// },
+				rating: {
+					...(query.stars > 0 && {
+						AND: [
+							{
+								avg: {
+									gte: query.stars - 1.0,
+								},
+							},
+							{
+								avg: {
+									lte: query.stars,
+								},
+							},
+						],
+					}),
+				},
 			},
 			orderBy: {
 				price: query.or_price,
-				// stars: query.or_stars,
 			},
 		};
 	}
