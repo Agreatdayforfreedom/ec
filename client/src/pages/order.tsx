@@ -86,9 +86,11 @@ const Order = () => {
 						</div>
 					</div>
 					<div className="mt-5 flex justify-end">
-						<Button variant={'magic'} asChild>
-							<Link to={`/order/${order.id}/payment`}>Continue</Link>
-						</Button>
+						{order.orderStatus === OrderStatus.PENDING && (
+							<Button variant={'magic'} asChild>
+								<Link to={`/order/${order.id}/payment`}>Continue</Link>
+							</Button>
+						)}
 					</div>
 				</div>
 			</div>
