@@ -9,6 +9,7 @@ export interface Product {
 	gems_price: number;
 	rating: Rating;
 	ratingId: string;
+	saga: Saga;
 }
 
 export enum ROLE {
@@ -47,6 +48,13 @@ export interface Order {
 	subtotal_gems: number;
 	orderStatus: OrderStatus;
 	order_items?: Order_Item[];
+}
+
+export interface Saga {
+	id: string;
+	name: string;
+	description: string;
+	products: Product[];
 }
 
 export enum OrderStatus {

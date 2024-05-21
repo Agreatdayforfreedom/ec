@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 import { Product as IProduct } from '@/interfaces';
 import { Button } from '@/components/ui/button';
@@ -73,6 +73,14 @@ export const Product = () => {
 									<span className="mt-1 font-semibold">
 										{product.gems_price}
 									</span>
+								</div>
+								<div>
+									<Link to={`/saga/${product.saga.id}`}>
+										Saga:{' '}
+										<span className="font-semibold text-magic-200 hover:underline">
+											{product.saga.name}
+										</span>
+									</Link>
 								</div>
 							</div>
 							<div>

@@ -9,9 +9,10 @@ import { CartModule } from './cart/cart.module';
 import { ReviewsModule } from './reviews/reviews.module';
 import { OrderModule } from './order/order.module';
 import { CheckoutModule } from './checkout/checkout.module';
+import { SagaModule } from './saga/saga.module';
 
 @Module({
-  imports: [ProductModule, UserModule, AuthModule, MetadataModule, CartModule, ReviewsModule, OrderModule, CheckoutModule],
+  imports: [ProductModule, UserModule, AuthModule, MetadataModule, CartModule, ReviewsModule, OrderModule, CheckoutModule, SagaModule],
   controllers: [AppController],
   providers: [AppService],
 })

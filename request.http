@@ -14,14 +14,24 @@ content-type: application/json
 Authorization: {{token}}
 
 {
-	"title": "Harry Potter and the Philosopher's Stone",
-	"description": "Turning the envelope over, his hand trembling, Harry saw a purple wax seal bearing a coat of arms; a lion, an eagle, a badger and a snake surrounding a large letter 'H'.\n\nHarry Potter has never even heard of Hogwarts when the letters start dropping on the doormat at number four, Privet Drive. Addressed in green ink on yellowish parchment with a purple seal, they are swiftly confiscated by his grisly aunt and uncle. Then, on Harry's eleventh birthday, a great beetle-eyed giant of a man called Rubeus Hagrid bursts in with some astonishing news: Harry Potter is a wizard, and he has a place at Hogwarts School of Witchcraft and Wizardry. An incredible adventure is about to begin!",
+	"title": "Harry Potter and the Chamber of Secrets",
+	"description": "Harry Potter's summer has included the worst birthday ever, doomy warnings from a house-elf called Dobby, and rescue from the Dursleys by his friend Ron Weasley in a magical flying car! Back at Hogwarts School of Witchcraft and Wizardry for his second year, Harry hears strange whispers echo through empty corridors - and then the attacks start. Students are found as though turned to stone... Dobby's sinister predictions seem to be coming true. Having become classics of our time, the Harry Potter eBooks never fail to bring comfort and escapism. With their message of hope, belonging and the enduring power of truth and love, the story of the Boy Who Lived continues to delight generations of new readers.",
 	"author": "J.K. Rowling",
 	"stock": 23,
 	"price": 7,
-	"image": "https://m.media-amazon.com/images/I/81m9fP+LIPL._SL1500_.jpg"
+	"image": "https://m.media-amazon.com/images/I/81Wbfijio4L._SL1500_.jpg",
+	"order": 2
 }
 
+###
+
+PUT http://localhost:{{port}}/product/clwfd38rb0000109lhdf9ozgs HTTP/1.1
+content-type: application/json
+Authorization: {{token}}
+
+{
+	"sagaId": "clwgql39s0002xelw09mcz4xw"
+}
 
 ### #! AUTH 
 
@@ -143,3 +153,18 @@ Authorization: {{token}}
 
 GET http://localhost:{{port}}/stripe/customers
 Authorization: {{token}}
+
+
+### saga
+
+GET http://localhost:{{port}}/saga/clwgql39s0002xelw09mcz4xw
+
+###
+POST http://localhost:{{port}}/saga/create
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+	"name": "Harry pother",
+	"description": "Harry pother saga"
+}

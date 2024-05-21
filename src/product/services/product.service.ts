@@ -1,6 +1,6 @@
 import { HttpException, Injectable } from '@nestjs/common';
 import { PrismaService } from '../../prisma.service';
-import { CreateProductDTO } from '../dto/product.dto';
+import { CreateProductDTO, UpdateProductDTO } from '../dto/product.dto';
 import { Prisma, Product } from '@prisma/client';
 import { Query } from '../../types';
 
@@ -19,6 +19,7 @@ export class ProductService {
 			},
 			include: {
 				metadata: true,
+				saga: true,
 				rating: {
 					include: {
 						_count: {
@@ -51,14 +52,34 @@ export class ProductService {
 		};
 	}
 
-	async create(payload: CreateProductDTO) {
+	async create({ sagaId, ...payload }: CreateProductDTO) {
 		return await this.prisma.product.create({
 			data: {
 				...payload,
+				saga: {
+					...(sagaId
+						? {
+								connect: {
+									id: sagaId,
+								},
+							}
+						: {}),
+				},
 				gems_price: payload.price * 100,
 				rating: {
 					create: { avg: 0 },
 				},
+			},
+		});
+	}
+
+	async update(productId: string, payload: UpdateProductDTO) {
+		return await this.prisma.product.update({
+			where: {
+				id: productId,
+			},
+			data: {
+				...payload,
 			},
 		});
 	}

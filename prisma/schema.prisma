@@ -55,8 +55,13 @@ model Product {
 	
 	order_item  Order_Item[] 
 
-	rating   Rating @relation(fields: [ratingId], references: [id], onDelete: Cascade)  
-	ratingId String @unique
+	rating   		Rating @relation(fields: [ratingId], references: [id], onDelete: Cascade)  
+	ratingId 		String @unique
+
+	saga   			Saga?   @relation(fields: [sagaId], references: [id])
+	sagaId   		String?
+
+	order 			Int?
 
   @@map("product")
 }
@@ -141,6 +146,14 @@ model Metadata {
   productId String   @unique
 
   @@map("metadata")
+}
+
+model Saga {
+	id 					String @id @default(cuid())
+	name  			String
+	description String
+
+	products 		Product[]
 }
 
 model Rating {
