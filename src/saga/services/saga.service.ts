@@ -12,7 +12,22 @@ export class SagaService {
 				id: sagaId,
 			},
 			include: {
-				products: true,
+				products: {
+					orderBy: {
+						order: 'asc',
+					},
+					include: {
+						rating: {
+							include: {
+								_count: {
+									select: {
+										reviews: true,
+									},
+								},
+							},
+						},
+					},
+				},
 			},
 		});
 	}

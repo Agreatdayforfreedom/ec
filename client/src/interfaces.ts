@@ -10,6 +10,7 @@ export interface Product {
 	rating: Rating;
 	ratingId: string;
 	saga: Saga;
+	order: number;
 }
 
 export enum ROLE {
@@ -54,6 +55,9 @@ export interface Saga {
 	id: string;
 	name: string;
 	description: string;
+	_count?: {
+		products: number;
+	};
 	products: Product[];
 }
 

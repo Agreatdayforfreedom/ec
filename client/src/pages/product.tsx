@@ -63,6 +63,18 @@ export const Product = () => {
 							</div>
 							<p className="mx-2 mt-5 text-magic-50">{product.description}</p>
 						</div>
+						{product.saga && (
+							<div className="flex flex-col">
+								<Link
+									className="font-semibold text-magic-200 hover:underline"
+									to={`/saga/${product.saga.id}`}
+								>
+									Book {product.order} of {product.saga._count?.products}:{' '}
+									{product.saga.name}
+								</Link>
+								<span className="font-semibold text-slate-300"></span>
+							</div>
+						)}
 						<div className="flex items-center justify-between">
 							<div className="flex flex-col">
 								<span className="font-semibold text-green-600">
@@ -73,14 +85,6 @@ export const Product = () => {
 									<span className="mt-1 font-semibold">
 										{product.gems_price}
 									</span>
-								</div>
-								<div>
-									<Link to={`/saga/${product.saga.id}`}>
-										Saga:{' '}
-										<span className="font-semibold text-magic-200 hover:underline">
-											{product.saga.name}
-										</span>
-									</Link>
 								</div>
 							</div>
 							<div>

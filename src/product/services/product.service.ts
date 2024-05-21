@@ -19,7 +19,15 @@ export class ProductService {
 			},
 			include: {
 				metadata: true,
-				saga: true,
+				saga: {
+					include: {
+						_count: {
+							select: {
+								products: true,
+							},
+						},
+					},
+				},
 				rating: {
 					include: {
 						_count: {

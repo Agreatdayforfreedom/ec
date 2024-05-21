@@ -15,6 +15,7 @@ import { Cart } from '@/pages/cart';
 import { Orders } from './pages/orders';
 import Order from './pages/order';
 import { Payment } from './pages/payment';
+import { Saga } from './pages/saga';
 
 function App() {
 	axios.defaults.baseURL = 'http://localhost:4000';
@@ -36,6 +37,7 @@ function App() {
 				<Route path="/orders" element={<Orders />} />
 				<Route path="/order/:id" element={<Order />} />
 				<Route path="/order/:id/payment" element={<Payment />} />
+				<Route path="/saga/:id" element={<Saga />} />
 			</Route>
 		</Routes>
 	);

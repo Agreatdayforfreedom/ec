@@ -1,4 +1,4 @@
-@token = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNsd2YyZ3M3eTAwMDA2YmQ5b3BrZTZzZjYiLCJlbWFpbCI6InNvbWFAZ21haWwuY29tIiwidXNlcm5hbWUiOiJTb21hIiwiY2FydCI6ImNsd2YyZ3M4MTAwMDE2YmQ5Z3Jvb3N4bXQiLCJnZW1zIjoxMDAwLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3MTYyMzM0MzMsImV4cCI6MTcxNjMxOTgzM30.2xu0ceQ3ePjQufpahy2Up9R3UJIVhaBZL3347ZD3ae4
+@token = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNsd2YyZ3M3eTAwMDA2YmQ5b3BrZTZzZjYiLCJlbWFpbCI6InNvbWFAZ21haWwuY29tIiwidXNlcm5hbWUiOiJTb21hIiwiY2FydCI6ImNsd2YyZ3M4MTAwMDE2YmQ5Z3Jvb3N4bXQiLCJnZW1zIjoxMDAwLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3MTYzMjE4OTUsImV4cCI6MTcxNjQwODI5NX0.6eSX80DPAwL4XaX2v1tEnsOGm3LgAFGbemP8xmYDyu4
 @port = 4000
 //PRODUCT
 
@@ -25,7 +25,7 @@ Authorization: {{token}}
 
 ###
 
-PUT http://localhost:{{port}}/product/clwfd38rb0000109lhdf9ozgs HTTP/1.1
+PUT http://localhost:{{port}}/product/clwgpmirq000214dbqrasixec HTTP/1.1
 content-type: application/json
 Authorization: {{token}}
 
